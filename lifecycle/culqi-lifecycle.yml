@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/ + openapi/culqi-openapi.yml
+description: >-
+  Versioning and deprecation posture for Culqi. The REST API is v2 (uri-path),
+  with an x-api-version header sent by the official SDKs. Culqi has published
+  deprecation / migration notices for its front-end products (CulqiJS and
+  Checkout).
+versioning:
+  scheme: uri-path
+  current: v2
+  header: x-api-version
+deprecation:
+  policy_url: https://docs.culqi.com/es/documentacion/checkout/checkout-custom
+  sunset_header: false
+  notices:
+    - product: Culqi Checkout v4
+      status: deprecating
+      guidance: Migrate to Custom Checkout to keep secure, customizable payments.
+      source: https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout/
+    - product: CulqiJS v2 / v3 / v4
+      status: unsupported
+      guidance: Versions v2, v3 and v4 of CulqiJS no longer receive support; integrate via the new Custom Checkout.
+      source: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
+sla:
+  url: null
+  note: No public SLA / uptime target published.
+status_page:
+  url: null
+  note: >-
+    No dedicated public Culqi status page found (culqi.statuspage.io resolves to
+    the generic Atlassian Statuspage marketing page, not a Culqi status board).
+deprecated_operations: []

@@ -1,0 +1,39 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/es/documentacion/pagos-online/denegaciones/
+description: >-
+  Culqi charge decline / rejection (denegaciones) codes returned when a card
+  charge is refused by the issuing bank or Culqi's processor. These complement
+  errors/culqi-problem-types.yml (which covers API-level HTTP errors). On a
+  declined charge Culqi returns an error object; the specific bank reason
+  appears in the decline_code field.
+envelope:
+  object: error
+  fields:
+    - object            # always "error"
+    - type              # error category, e.g. card_error
+    - code              # Culqi error code, e.g. card_declined
+    - decline_code      # specific bank rejection reason (the codes below)
+    - merchant_message  # explanation for the merchant
+    - user_message      # customer-friendly message (safe to surface to buyer)
+    - param
+    - charge_id         # id of the failed charge (retrievable via getCharge)
+  masked_to_buyer: >-
+    merchant_message is intended for the merchant; user_message is the string
+    safe to display to the cardholder. decline_code is not shown to buyers.
+
+decline_codes:
+  - {code: expired_card, meaning: 'Tarjeta vencida. La tarjeta está vencida o la fecha de vencimiento es incorrecta.', action: Ask the customer to use a different, unexpired card.}
+  - {code: stolen_card, meaning: 'Tarjeta robada. La tarjeta fue bloqueada y reportada al banco emisor como robada.', action: Do not retry; customer must contact their bank.}
+  - {code: lost_card, meaning: 'Tarjeta perdida. La tarjeta fue bloqueada y reportada al banco emisor como perdida.', action: Do not retry; customer must contact their bank.}
+  - {code: insufficient_funds, meaning: 'Fondos insuficientes. La tarjeta no tiene fondos suficientes para la compra.', action: Ask the customer to use another card or retry later.}
+  - {code: contact_issuer, meaning: 'Operación denegada. El cliente debe comunicarse con su banco para más detalles.', action: Customer contacts their issuing bank.}
+  - {code: invalid_cvv, meaning: 'CVV inválido. El código de seguridad (CVV2/CVC2/CID) es inválido.', action: Re-enter the security code.}
+  - {code: incorrect_cvv, meaning: 'CVV incorrecto. El código de seguridad ingresado es incorrecto.', action: Re-enter the correct security code.}
+  - {code: too_many_attempts_cvv, meaning: 'Se superó el número de intentos permitidos del código de seguridad.', action: Wait and retry later, or use another card.}
+  - {code: issuer_not_available, meaning: 'Emisor no disponible. El banco que emitió la tarjeta no responde.', action: Retry later.}
+  - {code: issuer_decline_operation, meaning: 'Operación denegada por el banco emisor por una razón desconocida.', action: Customer contacts their bank or uses another card.}
+  - {code: invalid_card, meaning: 'La tarjeta tiene restricciones para este tipo de transacción.', action: Use a different card.}
+  - {code: processing_error, meaning: 'Error técnico durante el procesamiento de la transacción.', action: Retry the charge.}
+  - {code: fraudulent, meaning: 'Operación fraudulenta. El banco emisor sospecha que se trata de una compra fraudulenta.', action: Do not retry; customer contacts their bank.}
+  - {code: culqi_card, meaning: 'Tarjeta de prueba usada en ambiente de producción.', action: Use a real card in production; test cards only work in the integration environment.}

@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/culqi-openapi.yml + conventions/culqi-conventions.yml + errors/culqi-decline-codes.yml
+description: >-
+  Packaged Agent Skills for the Culqi API v2 — operating instructions grounded
+  in real operationIds from openapi/culqi-openapi.yml. Money-movement flows
+  require human confirmation per agentic-access/culqi-agentic-access.yml.
+skills:
+  - file: culqi-tokenize-and-charge.md
+    name: Tokenize a card and create a charge
+    api: openapi/culqi-openapi.yml
+    operations: [createToken, createCharge, getCharge]
+  - file: culqi-save-card-and-subscribe.md
+    name: Save a card to a customer and subscribe to a plan
+    api: openapi/culqi-openapi.yml
+    operations: [createCustomer, createCard, createPlan, createSubscription]
+  - file: culqi-refund-a-charge.md
+    name: Refund a charge
+    api: openapi/culqi-openapi.yml
+    operations: [getCharge, createRefund, getRefund]
+  - file: culqi-pagoefectivo-order.md
+    name: Create and confirm a PagoEfectivo order
+    api: openapi/culqi-openapi.yml
+    operations: [createOrder, confirmOrder, getOrder]

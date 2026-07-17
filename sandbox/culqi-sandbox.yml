@@ -1,0 +1,66 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/es/documentacion/pagos-online/tarjetas-de-prueba
+description: >-
+  Culqi test / integration environment: test-vs-live key prefixes and the
+  published test cards, test Yape values, and 3DS test cards used to exercise
+  the API without moving real money. Captured verbatim from the Culqi testing
+  documentation. Transactions made with these values are not real and only work
+  in the integration (test) environment.
+docs:
+  - https://docs.culqi.com/es/documentacion/pagos-online/tarjetas-de-prueba
+  - https://docs.culqi.com/es/documentacion/pagos-online/llaves/
+
+modes:
+  - name: test
+    key_prefixes: [pk_test_, sk_test_]
+    notes: >-
+      Integration keys, labelled "test" in the CulqiPanel (Development / API
+      Keys). Transactions are simulated and never settle real money.
+  - name: live
+    key_prefixes: [pk_live_, sk_live_]
+    notes: Production keys; switch to these after integration testing passes.
+
+key_formats:
+  public: {test: pk_test_..., live: pk_live_...}
+  secret: {test: sk_test_..., live: sk_live_...}
+
+# Published test cards — success cases (any future expiry may be used unless noted).
+test_cards:
+  success:
+    - {brand: Visa, number: '4111111111111111', exp: '09/30', cvv: '123', type: debit}
+    - {brand: Visa, number: '4111111110101113', exp: '09/30', cvv: '123', type: credit}
+    - {brand: Mastercard, number: '5111111111111118', exp: '12/30', cvv: '039', type: credit}
+    - {brand: Amex, number: '371212121212122', exp: '12/30', cvv: '2841', type: credit}
+    - {brand: Diners, number: '3600121212121210', exp: '12/30', cvv: '964', type: credit}
+  error:
+    - {brand: Visa, number: '4111110000000013', exp: '12/30', cvv: '123', outcome: DNGE0087}
+    - {brand: Visa, number: '4000020000000000', exp: '10/30', cvv: '354', outcome: stolen_card}
+    - {brand: Mastercard, number: '5400020000000003', exp: '07/30', cvv: '203', outcome: incorrect_cvv}
+    - {brand: Amex, number: '370002000000008', exp: '05/30', cvv: '1810', outcome: issuer_decline_operation}
+
+# 3-D Secure test cards (Culqi 3DS) — confirm via the confirmCharge operation.
+test_cards_3ds:
+  visa:
+    - {number: '4456530000001096', exp: '07/30', cvv: '111', outcome: success_with_challenge}
+    - {number: '4456530000001005', exp: '07/30', cvv: '111', outcome: success_without_challenge}
+    - {number: '4456530000001070', exp: '07/30', cvv: '111', outcome: failed_timeout}
+    - {number: '4456530000001013', exp: '07/30', cvv: '111', outcome: failed_auth_error}
+  mastercard:
+    - {number: '5200000000001096', exp: '12/30', cvv: '111', outcome: success_with_challenge}
+    - {number: '5200000000001005', exp: '12/30', cvv: '111', outcome: success_without_challenge}
+    - {number: '5200000000001070', exp: '12/30', cvv: '111', outcome: failed_timeout}
+    - {number: '5200000000001013', exp: '12/30', cvv: '111', outcome: failed_auth_error}
+
+# Yape (BCP mobile wallet) test values for the createYapeToken flow.
+test_yape:
+  number_phone: '900000001'
+  otp: 'any 6-digit number (e.g. 123456)'
+  note: The verification/OTP code can be any 6 random digits in the test environment.
+
+notes: >-
+  Culqi has no test-clock / time-simulation tooling documented. There is no
+  Stripe-CLI-style local trigger tool; webhook events are exercised by driving
+  real test-mode operations. To encrypt the CulqiJS payload in some checkout
+  flows an RSA id + RSA public key are generated in CulqiPanel > Development >
+  RSA Keys.

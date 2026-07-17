@@ -1,0 +1,30 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/culqi-openapi.yml
+description: >-
+  Entity-relationship graph derived from the Culqi OpenAPI schemas and the
+  id-reference fields between resources. Id prefixes are taken from the schema
+  examples in the spec.
+entities:
+  - {name: Token, id_prefix: 'tkn_ / ype_', schema: Token}
+  - {name: Charge, id_prefix: chr_, schema: Charge}
+  - {name: Order, id_prefix: ord_, schema: Order}
+  - {name: Refund, id_prefix: ref_, schema: Refund}
+  - {name: Customer, id_prefix: cus_, schema: Customer}
+  - {name: Card, id_prefix: crd_, schema: Card}
+  - {name: Plan, id_prefix: pln_, schema: Plan}
+  - {name: Subscription, id_prefix: sxn_, schema: Subscription}
+  - {name: Event, id_prefix: evt_, schema: Event}
+  - {name: Iin, id_prefix: null, schema: Iin}
+  - {name: Transfer, id_prefix: tr_, schema: Transfer}
+relationships:
+  - {from: Charge, type: belongs_to, to: Token, via: source_id}
+  - {from: Card, type: belongs_to, to: Customer, via: customer_id}
+  - {from: Card, type: belongs_to, to: Token, via: token_id}
+  - {from: Customer, type: has_many, to: Card, via: cards}
+  - {from: Refund, type: belongs_to, to: Charge, via: charge_id}
+  - {from: Subscription, type: belongs_to, to: Card, via: card_id}
+  - {from: Subscription, type: belongs_to, to: Plan, via: plan_id}
+  - {from: Token, type: has_one, to: Iin, via: iin}
+  - {from: Event, type: references, to: Charge, via: 'data (charge.* events)'}
+  - {from: Event, type: references, to: Order, via: 'data (order.* events)'}

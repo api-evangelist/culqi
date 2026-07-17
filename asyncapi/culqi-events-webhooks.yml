@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
+spec_type: Webhooks
+description: >-
+  Culqi's webhook / event surface. Culqi does not publish an AsyncAPI document;
+  it delivers account events as HTTP POST callbacks to an endpoint configured in
+  the CulqiPanel (Eventos > Webhook). Events are also retrievable via the REST
+  Events API (listEvents / getEvent). This catalog captures the documented event
+  families and confirmed event type strings; the exhaustive enumerated list
+  lives in the CulqiPanel event-type picker.
+delivery:
+  transport: HTTP POST callback to a merchant-configured endpoint
+  configured_in: CulqiPanel > Eventos > Webhook
+  retrievable_via:
+    - openapi/culqi-openapi.yml#listEvents
+    - openapi/culqi-openapi.yml#getEvent
+  payload: >-
+    JSON event object { object: "event", id: "evt_...", type: "<event.type>",
+    creation_date, data: { ...the affected resource... } }
+event_families:
+  - tokens        # Tokens
+  - charges       # Cargos
+  - refunds       # Devoluciones
+  - customers     # Clientes
+  - cards         # Tarjetas
+  - plans         # Planes
+  - subscriptions # Suscripciones
+  - orders        # Órdenes
+confirmed_event_types:
+  - charge.creation.succeeded
+  - charge.failed
+  - order.status.changed
+notes: >-
+  Signature/verification specifics are not published as a documented HMAC
+  scheme in the public docs; merchants validate by refetching the referenced
+  resource (e.g. getCharge with the event's charge id). Because Culqi ships no
+  AsyncAPI document, no AsyncAPI-spec pointer is emitted — only Webhooks.

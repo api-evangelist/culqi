@@ -266,6 +266,62 @@ common:
   url: finops/culqi-finops.yml
 - url: https://medium.com/team-culqi
   type: Blog
+- type: DeveloperPortal
+  url: https://docs.culqi.com/
+- type: APIReference
+  url: https://apidocs.culqi.com/
+- type: GettingStarted
+  url: https://docs.culqi.com/es/documentacion/primeros-pasos/introduccion/
+- type: Support
+  url: https://culqi.com/centro-de-ayuda/
+- type: Pricing
+  url: https://culqi.com/precios/
+- type: SignUp
+  url: https://afiliate.culqi.com/
+- type: Login
+  url: https://culqipanel.culqi.com/
+- type: TermsOfService
+  url: https://culqi.com/terminos_y_condiciones/
+- type: PrivacyPolicy
+  url: https://culqi.com/politicas-de-privacidad/
+- type: Postman
+  url: collections/culqi.postman_collection.json
+- type: Packages
+  url: packages/culqi-packages.yml
+- type: SDKs
+  url: packages/culqi-packages.yml
+- type: Sandbox
+  url: sandbox/culqi-sandbox.yml
+- type: DeclineCodes
+  url: errors/culqi-decline-codes.yml
+- type: ErrorCatalog
+  url: errors/culqi-problem-types.yml
+- type: Webhooks
+  url: asyncapi/culqi-events-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/culqi-mcp.yml
+- type: LLMsTxt
+  url: llms/culqi-llms.txt
+- type: Overlay
+  url: overlays/culqi-openapi-overlay.yaml
+- type: Conventions
+  url: conventions/culqi-conventions.yml
+- type: DataModel
+  url: data-model/culqi-data-model.yml
+- type: Conformance
+  url: conformance/culqi-conformance.yml
+- type: Compliance
+  url: security/culqi-trust-center.yml
+- type: Lifecycle
+  url: lifecycle/culqi-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/culqi-lifecycle.yml
+- type: Components
+  url: components/culqi-components.yml
+- type: Security
+  url: security/culqi-vulnerability-disclosure.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

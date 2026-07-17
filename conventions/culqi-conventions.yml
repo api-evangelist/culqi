@@ -1,0 +1,63 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/ + openapi/culqi-openapi.yml
+description: >-
+  Cross-cutting request/response conventions for the Culqi API v2 that apply
+  across operations: authentication, versioning, pagination, metadata, amounts,
+  the error envelope, and idempotency posture. Derived from the OpenAPI and the
+  Culqi developer documentation.
+
+base_urls:
+  server: https://api.culqi.com/v2   # secret key (sk_)
+  secure: https://secure.culqi.com/v2 # public key (pk_), tokenization + 3DS
+
+authentication:
+  scheme: HTTP Bearer
+  key_types: [secret (sk_live_/sk_test_), public (pk_live_/pk_test_)]
+  detail: authentication/culqi-authentication.yml
+
+versioning:
+  scheme: uri-path
+  current: v2
+  header: x-api-version   # sent by official SDKs (culqi-go/client.go)
+  client_headers: [x-culqi-client, x-culqi-client-version]
+
+idempotency:
+  supported: false
+  note: >-
+    Culqi does not document an Idempotency-Key request header or any idempotent-
+    replay contract. Retries of POST operations (createCharge, createRefund) are
+    not deduplicated by the API; clients must guard against double-submission
+    themselves (e.g. by checking listCharges / the returned charge_id).
+
+pagination:
+  style: cursor
+  request_params:
+    limit: 1-100, default 10
+    before: return records created before this id
+    after: return records created after this id
+  response_fields:
+    object: list
+    data: array of results
+    paging: {previous, next, cursors: {before, after}}
+
+amounts:
+  representation: integer minor units (cents)
+  example: 10000 = S/100.00
+  currencies: [PEN, USD]
+
+metadata:
+  supported: true
+  mechanism: metadata object (string key/value) on most resources; MetadataUpdate via PATCH.
+
+request_tracing:
+  documented: false
+  note: No documented request-id / correlation header in the public docs.
+
+rate_limit_signaling:
+  detail: rate-limits/culqi-rate-limits.yml
+
+error_envelope:
+  detail: errors/culqi-problem-types.yml
+  decline_codes: errors/culqi-decline-codes.yml
+  shape: 'JSON object { object: "error", type, code, decline_code, merchant_message, user_message, param }'

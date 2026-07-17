@@ -1,0 +1,32 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.culqi.com/es/documentacion/checkout/ + https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
+description: >-
+  Client-side / embeddable Culqi payment surfaces a merchant drops into a web or
+  mobile store. Distinct from the server-side SDKs in packages/. These handle
+  card capture and tokenization in the browser so PANs never touch the merchant
+  server.
+components:
+  - family: Checkout
+    name: Custom Checkout
+    kind: embedded prebuilt payment form (recommended)
+    docs: https://docs.culqi.com/es/documentacion/checkout/checkout-custom
+    accepts: [card, Yape, PagoEfectivo, mobile wallet, Cuotealo]
+    note: The current recommended integration; supersedes Checkout v4.
+  - family: Checkout
+    name: Culqi Checkout v4 (multipago)
+    kind: embedded prebuilt payment form
+    status: deprecating
+    docs: https://docs.culqi.com/es/documentacion/checkout/v4/culqi-checkout/
+    customization: [merchant name, brand colors, merchant logo]
+  - family: CulqiJS
+    name: CulqiJS v4
+    kind: JavaScript tokenization / custom form library
+    status: unsupported
+    docs: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
+    loader: include CulqiJS before </body> and configure the public key (pk_)
+    note: Fully customizable payment form; v2/v3/v4 no longer supported — use Custom Checkout.
+  - family: Mobile
+    name: Culqi Android SDK
+    kind: native Android checkout / 3DS component
+    source: https://github.com/culqi/culqi-android

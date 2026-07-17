@@ -1,0 +1,77 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/culqi + https://docs.culqi.com/es/documentacion/librerias/
+description: >-
+  First-party Culqi client libraries, published under the official Culqi GitHub
+  organization (github.com/culqi) and referenced from the Culqi developer
+  documentation. All are compatible with Culqi API v2.0. Registry coordinates
+  are recorded where confirmed; the GitHub repository is the authoritative
+  source for each. Third-party/community wrappers (e.g. giwiro/culqi-node) are
+  intentionally excluded.
+packages:
+  - language: python
+    registry: pypi
+    name: culqi
+    url: https://github.com/culqi/culqi-python
+    source: https://github.com/culqi/culqi-python
+    install: pip install culqi
+    official: true
+  - language: php
+    registry: packagist
+    name: culqi/culqi
+    url: https://github.com/culqi/culqi-php
+    source: https://github.com/culqi/culqi-php
+    install: composer require culqi/culqi
+    official: true
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/culqi/culqi-go
+    url: https://pkg.go.dev/github.com/culqi/culqi-go
+    source: https://github.com/culqi/culqi-go
+    install: go get github.com/culqi/culqi-go
+    official: true
+  - language: ruby
+    registry: github
+    name: culqi-ruby
+    url: https://github.com/culqi/culqi-ruby
+    source: https://github.com/culqi/culqi-ruby
+    official: true
+  - language: java
+    registry: github
+    name: culqi-java
+    url: https://github.com/culqi/culqi-java
+    source: https://github.com/culqi/culqi-java
+    official: true
+  - language: dotnet
+    registry: github
+    name: culqi-net
+    url: https://github.com/culqi/culqi-net
+    source: https://github.com/culqi/culqi-net
+    official: true
+    note: .NET Core implementation; culqi-net_framework is the .NET Framework variant.
+  - language: rust
+    registry: github
+    name: culqi-rust
+    url: https://github.com/culqi/culqi-rust
+    source: https://github.com/culqi/culqi-rust
+    official: true
+  - language: android
+    registry: github
+    name: culqi-android
+    url: https://github.com/culqi/culqi-android
+    source: https://github.com/culqi/culqi-android
+    official: true
+    note: Native Android SDK for Culqi Checkout / 3DS.
+plugins:
+  - platform: woocommerce
+    name: culqi-woocommerce
+    url: https://github.com/culqi/culqi-woocommerce
+    official: true
+  - platform: magento
+    name: culqi-magento
+    url: https://github.com/culqi/culqi-magento
+    official: true
+  - platform: prestashop
+    name: culqi-prestashop
+    url: https://github.com/culqi/culqi-prestashop
+    official: true

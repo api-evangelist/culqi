@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Culqi API v2
+  version: 1.0.0
+extends: openapi/culqi-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-artifacts:
+        packages: packages/culqi-packages.yml
+        sandbox: sandbox/culqi-sandbox.yml
+        conventions: conventions/culqi-conventions.yml
+        data_model: data-model/culqi-data-model.yml
+        decline_codes: errors/culqi-decline-codes.yml
+        problem_types: errors/culqi-problem-types.yml
+        webhooks: asyncapi/culqi-events-webhooks.yml
+        authentication: authentication/culqi-authentication.yml
+        agentic_access: agentic-access/culqi-agentic-access.yml
+  - target: $.info
+    update:
+      x-apievangelist-conformance:
+        pci-dss: Level 1
+        3d-secure: true
+        idempotency: not-supported
+  - target: $.paths['/charges'].post
+    update:
+      x-agentic-consequence: physical
+      x-agentic-human-in-the-loop: required
+  - target: $.paths['/refunds'].post
+    update:
+      x-agentic-consequence: physical
+      x-agentic-human-in-the-loop: required
+  - target: $.paths['/charges/{id}/capture'].post
+    update:
+      x-agentic-consequence: physical
+      x-agentic-human-in-the-loop: required

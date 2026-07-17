@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/culqi-openapi.yml + https://docs.culqi.com/ + security/culqi-trust-center.yml
+description: >-
+  Industry / cross-cutting standards conformance for the Culqi API, derived from
+  the OpenAPI and the Culqi security documentation. Culqi is a card acquirer, so
+  card-data security (PCI DSS) and 3-D Secure are the relevant standards; it is
+  not an OAuth/OIDC or FHIR/SCIM/OData API.
+standards:
+  - id: pci-dss
+    conforms: true
+    level: Level 1
+    evidence: >-
+      Culqi is PCI DSS Level 1 certified; card data is tokenized client-side on
+      the PCI-scoped secure host (secure.culqi.com). See
+      security/culqi-trust-center.yml.
+  - id: 3d-secure
+    conforms: true
+    evidence: 'Culqi 3DS: /confirm (confirmCharge) confirms a 3-D Secure authenticated charge.'
+  - id: oauth2
+    conforms: false
+    evidence: Auth is HTTP Bearer with pk_/sk_ API keys, not OAuth2.
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom JSON error object, not application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: before/after cursor params with a paging.cursors response block.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header documented (conventions/culqi-conventions.yml).

@@ -1,0 +1,23 @@
+generated: '2026-07-17'
+method: searched
+source: live probe of /.well-known/* on culqi hosts, July 2026
+description: >-
+  Probe of the /.well-known/ discovery surface for the Culqi hosts. No genuine
+  well-known documents are served: the marketing host returns its SPA HTML shell
+  (HTTP 200) for any /.well-known path, and the API hosts require auth (401). No
+  WellKnown/SecurityTxt canonical pointer is emitted because nothing real was
+  found. Absence is valid, recorded data.
+hosts:
+  - host: https://culqi.com
+    documents:
+      - {path: /.well-known/security.txt, status: 200, result: SPA HTML shell (not a real security.txt)}
+      - {path: /.well-known/openid-configuration, status: 200, result: SPA HTML shell (not OIDC discovery)}
+  - host: https://api.culqi.com
+    documents:
+      - {path: /.well-known/security.txt, status: 401, result: authentication required}
+  - host: https://api.culqi.com/v2
+    documents:
+      - {path: /.well-known/oauth-authorization-server, status: 401, result: authentication required}
+  - host: https://docs.culqi.com
+    documents:
+      - {path: /llms.txt, status: 200, result: redirect stub to /es/documentacion (no real llms.txt)}

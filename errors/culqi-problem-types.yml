@@ -1,0 +1,42 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/culqi-openapi.yml
+format: culqi-error-object
+description: >-
+  API-level error responses derived from the 4xx/5xx responses declared in the
+  Culqi OpenAPI. Culqi does NOT use RFC 9457 application/problem+json; it returns
+  a JSON error object (object=error) with type/code/decline_code/merchant_message
+  /user_message/param. Charge-specific bank rejections are catalogued separately
+  in errors/culqi-decline-codes.yml. Titles/remediation enriched from the Culqi
+  docs error reference.
+envelope_schema: '#/components/schemas/Error'
+error_types:
+  - type: authentication_error
+    meaning: Invalid or missing API key (wrong pk_/sk_, or test key in live).
+    http: 401
+  - type: invalid_request_error
+    meaning: Malformed request, missing/invalid parameter (see the param field).
+    http: 400
+  - type: card_error
+    meaning: The card was declined; see decline_code (errors/culqi-decline-codes.yml).
+    http: 402
+  - type: parameter_error
+    meaning: A specific parameter failed validation.
+    http: 400
+problems:
+  - status: 400
+    title: Bad request / validation error
+    type: invalid_request_error
+    source_operations: [createToken, createYapeToken, confirmCharge, createCharge, createOrder, confirmOrder, createRefund, createCustomer, createCard, createPlan, createSubscription]
+  - status: 401
+    title: Unauthorized (invalid or missing API key)
+    type: authentication_error
+    source_operations: [createToken, confirmCharge]
+  - status: 402
+    title: Payment required (charge declined)
+    type: card_error
+    source_operations: [createCharge]
+  - status: 404
+    title: Resource not found
+    type: invalid_request_error
+    source_operations: [getToken, getCharge, getOrder, getRefund, getCustomer, getCard, getPlan, getSubscription, getEvent, getIin, getTransfer]

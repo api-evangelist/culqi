@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/culqi-openapi.yml
+description: >-
+  Culqi publishes no official hosted or packaged MCP server (no entry in the MCP
+  registry, npm @modelcontextprotocol, or the Culqi docs/GitHub org as of July
+  2026). This is a DERIVED candidate tool list — one tool per Culqi API
+  operationId — to seed an MCP server. Money-movement tools (create/capture
+  charge, refund, confirm, subscribe) should require human-in-the-loop per
+  agentic-access/culqi-agentic-access.yml before any real deployment.
+server:
+  name: culqi
+  transport: http
+  url: null
+tools:
+  - {name: create_token, source_operation: 'openapi/culqi-openapi.yml#createToken'}
+  - {name: create_yape_token, source_operation: 'openapi/culqi-openapi.yml#createYapeToken'}
+  - {name: confirm_charge_3ds, source_operation: 'openapi/culqi-openapi.yml#confirmCharge'}
+  - {name: create_charge, source_operation: 'openapi/culqi-openapi.yml#createCharge'}
+  - {name: capture_charge, source_operation: 'openapi/culqi-openapi.yml#captureCharge'}
+  - {name: get_charge, source_operation: 'openapi/culqi-openapi.yml#getCharge'}
+  - {name: list_charges, source_operation: 'openapi/culqi-openapi.yml#listCharges'}
+  - {name: create_order, source_operation: 'openapi/culqi-openapi.yml#createOrder'}
+  - {name: confirm_order, source_operation: 'openapi/culqi-openapi.yml#confirmOrder'}
+  - {name: create_refund, source_operation: 'openapi/culqi-openapi.yml#createRefund'}
+  - {name: create_customer, source_operation: 'openapi/culqi-openapi.yml#createCustomer'}
+  - {name: create_card, source_operation: 'openapi/culqi-openapi.yml#createCard'}
+  - {name: create_plan, source_operation: 'openapi/culqi-openapi.yml#createPlan'}
+  - {name: create_subscription, source_operation: 'openapi/culqi-openapi.yml#createSubscription'}
+  - {name: list_events, source_operation: 'openapi/culqi-openapi.yml#listEvents'}
+  - {name: get_iin, source_operation: 'openapi/culqi-openapi.yml#getIin'}
+  - {name: list_transfers, source_operation: 'openapi/culqi-openapi.yml#listTransfers'}
