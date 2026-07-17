@@ -1,0 +1,271 @@
+aid: culqi
+url: https://raw.githubusercontent.com/api-evangelist/culqi/refs/heads/main/apis.yml
+name: Culqi
+kind: company
+description: Culqi is a Peruvian online payments platform and a Grupo Credicorp /
+  Krealo company. Its REST API v2 lets businesses accept card, Yape, PagoEfectivo,
+  mobile wallet and Cuotealo (installment) payments in PEN and USD, with card data
+  tokenized client-side against a PCI-scoped secure host and all money movement,
+  subscriptions and webhooks driven from a server-side secret key.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Payment Gateway
+- FinTech
+- Peru
+- LatAm
+- Cards
+- Yape
+created: '2026-07-17'
+modified: '2026-07-17'
+specificationVersion: '0.19'
+apis:
+- aid: culqi:culqi-tokens-api
+  name: Culqi Tokens API
+  tags:
+  - Tokens
+  - Tokenization
+  - PCI
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
+  baseURL: https://secure.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Client-side tokenization of card and Yape credentials on the
+    PCI-scoped secure host using the public key (pk_). Returns a single-use token
+    (tkn_/ype_) used as the source_id for a charge, plus 3DS charge confirmation.
+- aid: culqi:culqi-charges-api
+  name: Culqi Charges API
+  tags:
+  - Charges
+  - Payments
+  - Cargos
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/cargos/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Create, capture, retrieve and list one-time charges (cargos)
+    against a token, saved card or Yape token. Amounts are integers in the
+    currency minor unit (cents); currency_code is PEN or USD. Supports
+    authorization holds and Cuotealo installments.
+- aid: culqi:culqi-orders-api
+  name: Culqi Orders API
+  tags:
+  - Orders
+  - PagoEfectivo
+  - Bank Transfer
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Payment orders for asynchronous methods such as PagoEfectivo
+    (generates a CIP code) and bank transfers, with create, confirm, retrieve,
+    list, update and delete operations.
+- aid: culqi:culqi-refunds-api
+  name: Culqi Refunds API
+  tags:
+  - Refunds
+  - Devoluciones
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Full or partial refunds (devoluciones) of a charge, with a
+    documented reason (duplicado, fraudulento, solicitud_comprador).
+- aid: culqi:culqi-customers-api
+  name: Culqi Customers API
+  tags:
+  - Customers
+  - Clientes
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Create, retrieve, list, update and delete stored customer
+    (cliente) profiles for saving cards and running recurring payments.
+- aid: culqi:culqi-cards-api
+  name: Culqi Cards API
+  tags:
+  - Cards
+  - Tarjetas
+  - Vault
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Save a tokenized card to a customer and manage saved cards
+    (create, retrieve, list, update, delete) for one-click and recurring charges.
+- aid: culqi:culqi-plans-api
+  name: Culqi Plans API
+  tags:
+  - Plans
+  - Recurring
+  - Planes
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Define recurring-billing plans (interval, amount, currency, limit)
+    that subscriptions bill against.
+- aid: culqi:culqi-subscriptions-api
+  name: Culqi Subscriptions API
+  tags:
+  - Subscriptions
+  - Recurring
+  - Suscripciones
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Subscribe a saved card to a plan for recurring charges, with
+    create, retrieve, list, update and cancel operations.
+- aid: culqi:culqi-events-api
+  name: Culqi Events & Webhooks API
+  tags:
+  - Events
+  - Webhooks
+  - Eventos
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
+    type: Documentation
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Retrieve and list account event objects (charge.creation.succeeded,
+    order.status.changed, and more) that Culqi delivers to configured webhook
+    endpoints as HTTP callbacks.
+- aid: culqi:culqi-iin-api
+  name: Culqi IIN Lookup API
+  tags:
+  - IIN
+  - BIN
+  - Card Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://apidocs.culqi.com/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Look up card IIN/BIN metadata (brand, card type, issuer, country,
+    installments allowed) to drive checkout logic.
+- aid: culqi:culqi-transfers-api
+  name: Culqi Transfers API
+  tags:
+  - Transfers
+  - Settlement
+  - Abonos
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://apidocs.culqi.com/
+  baseURL: https://api.culqi.com/v2
+  properties:
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+  - url: openapi/culqi-openapi.yml
+    type: OpenAPI
+  - url: collections/culqi.postman_collection.json
+    type: PostmanCollection
+  description: Retrieve and list settlement transfers (abonos) paid out to the
+    merchant bank account.
+common:
+- type: AgenticAccess
+  url: agentic-access/culqi-agentic-access.yml
+- type: TrustCenter
+  url: security/culqi-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/culqi-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/culqi-domain-security.yml
+- type: Authentication
+  url: authentication/culqi-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/culqi
+- type: LinkedIn
+  url: https://www.linkedin.com/company/culqi
+- type: Website
+  url: https://culqi.com/
+- type: Documentation
+  url: https://docs.culqi.com/
+- type: Plans
+  url: plans/culqi-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/culqi-rate-limits.yml
+- type: FinOps
+  url: finops/culqi-finops.yml
+- url: https://medium.com/team-culqi
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

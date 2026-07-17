@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Culqi
+providerId: culqi
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- FinTech
+- Peru
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Culqi as a payment-acceptance cost. Culqi does not bill for
+  API calls; cost is the per-transaction merchant discount rate (comision)
+  deducted from each successful payment, quoted in PEN plus IGV (18% VAT), and
+  varying by method (card national/international, Yape, PagoEfectivo) with a
+  fixed minimum on small tickets. This is a cost-of-funds / payment-processing
+  spend category rather than a metered-API compute spend.
+notes: >-
+  Rates are subject to negotiation and change; verify against the Culqi
+  pricing page during reconciliation. Because commissions are deducted at
+  settlement, reconcile gross charges against net settlement transfers
+  (abonos) via the Transfers API to attribute true processing cost.
+sources:
+- https://culqi.com/precios/
+- https://docs.culqi.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Culqi
+serviceCategory: Payment Processing
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per-Transaction
+  billingCurrency: PEN
+  chargeCategories:
+  - Usage
+  - Tax
+  - Adjustment
+focusColumns:
+  ServiceName: Culqi Payments
+  ServiceCategory: Payment Processing
+  ProviderName: Culqi
+  PublisherName: Culqi
+  InvoiceIssuerName: Culqi
+  BillingCurrency: PEN
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: card_transaction_commission
+  description: Percentage discount rate on card charges (national vs international), plus a fixed USD per-transaction fee online, plus IGV.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - merchant
+  - card_origin
+  - channel
+- name: yape_transaction_commission
+  description: Percentage discount rate on Yape payments accepted via Culqi, plus IGV.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - merchant
+- name: pagoefectivo_transaction_commission
+  description: Percentage discount rate on PagoEfectivo / cash-agent payments, with a fixed minimum on small tickets, plus IGV.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - merchant
+- name: igv_tax
+  description: Peruvian IGV (18% VAT) applied on top of the commission.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - merchant
+- name: refunded_amount
+  description: Amounts refunded (devoluciones); reduces net settlement.
+  unit: currency_minor_unit
+  aggregation: sum
+  dimensions:
+  - merchant
+principles:
+- name: Visibility
+  description: Reconcile gross charges against net settlement transfers (abonos) to see true processing cost per payment method.
+- name: Allocation
+  description: Tag charges with metadata (order/team/campaign) to attribute processing cost to internal cost centers.
+- name: Optimization
+  description: Steer customers toward lower-commission methods where viable; avoid small-ticket PagoEfectivo transactions that hit the fixed S/3.50 minimum; negotiate volume rates.
+- name: Accountability
+  description: Assign an owner to payment-cost review; monitor commission-as-percent-of-revenue monthly against target.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

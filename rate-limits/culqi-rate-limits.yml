@@ -1,0 +1,55 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Culqi
+providerId: culqi
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- FinTech
+- Peru
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Culqi does not publish specific numeric API rate limits (RPM/RPS or daily
+  quotas) in its public developer documentation. As a card-present-grade
+  payment processor it applies platform-level abuse protection, per-merchant
+  risk controls and antifraud checks, and returns standard HTTP throttling
+  responses under sustained load. Concrete per-endpoint limits are not
+  documented and should be confirmed with Culqi support for high-volume use.
+notes: >-
+  No numeric limits are published on docs.culqi.com or apidocs.culqi.com as of
+  July 2026. Values here are the documented behaviors and conventions, not
+  reconciled numeric thresholds. Implement retry with exponential backoff and
+  honor any Retry-After header. Idempotency for charge creation should be
+  handled application-side (Culqi does not document an idempotency key header).
+sources:
+- https://docs.culqi.com/
+- https://apidocs.culqi.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: API request rate
+  scope: merchant
+  metric: requests
+  limit: not published
+  notes: No public RPM/RPS quota; platform-level abuse protection applies.
+- name: Tokenization attempts
+  scope: merchant
+  metric: requests
+  limit: not published
+  notes: Repeated failed tokenization / charge attempts may be throttled or flagged by antifraud.
+policies:
+- name: Antifraud controls
+  description: Culqi applies antifraud (antifraude) evaluation and device fingerprinting on charges; suspicious volume may be blocked independent of a fixed rate limit.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: 3-D Secure
+  description: Card charges may require Culqi 3DS challenge/confirm, which paces card-not-present traffic per cardholder.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,47 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts (2026-07-17)
+hosts:
+- host: api.culqi.com
+  https: true
+  http_status: 403
+  cert_expires: Nov 25 23:59:59 2026 GMT
+  hsts: false
+  note: Server-side API host. Returns 403 without a valid Bearer secret key (expected).
+- host: secure.culqi.com
+  https: true
+  http_status: 403
+  cert_expires: Nov 25 23:59:59 2026 GMT
+  hsts: false
+  note: PCI-scoped tokenization / 3DS confirm host. Returns 403 without a valid Bearer public key (expected).
+- host: culqi.com
+  https: true
+  http_status: 200
+  cert_expires: Oct 10 23:59:59 2026 GMT
+  hsts: false
+- host: docs.culqi.com
+  https: true
+  http_status: 200
+  cert_expires: Nov 25 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: culqi.com
+  dnssec: false
+  caa: []
+  caa_note: No CAA record published for culqi.com as of the probe date.
+  spf: true
+  spf_record: >-
+    v=spf1 include:_spf.google.com include:_spf.goskope.com include:sendgrid.net
+    include:_spf.embluemail.com include:transmail.net include:zcsend.net
+    include:spf.zoho.com ip4:205.201.128.0/20 ip4:198.2.128.0/18
+    ip4:148.105.8.0/21 ~all
+  dmarc: true
+  dmarc_policy: reject
+  dmarc_record: >-
+    v=DMARC1; p=reject; rua=mailto:infosec@culqi.com; ruf=mailto:infosec@culqi.com;
+    pct=100; fo=0:1:d:s;
+notes: >-
+  All API and web hosts serve HTTPS with valid TLS certificates. Neither the
+  API hosts nor the marketing site returned an HSTS response header on probe.
+  Email is strongly protected: SPF is published and DMARC is at p=reject with
+  aggregate/forensic reporting to infosec@culqi.com. No CAA record was found.

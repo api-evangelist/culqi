@@ -1,0 +1,82 @@
+aid: culqi
+name: Culqi
+review:
+  question: Does Culqi expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Culqi's API v2 is a request/response
+    REST API over HTTPS. Its only event-delivery mechanism is outbound
+    webhooks - Culqi POSTs event objects (charge.creation.succeeded,
+    order.status.changed, etc.) to a merchant-configured HTTP endpoint. That
+    is server-to-server HTTP callback delivery, not a client-consumed
+    streaming transport, and there is no documented Server-Sent Events (SSE)
+    stream either. Under current API Evangelist scope no AsyncAPI artifact
+    was warranted.
+findings:
+  summary: |
+    Culqi does not publish a documented public WebSocket API. The Culqi API
+    v2 exposes only REST (HTTPS) endpoints across two hosts:
+    https://api.culqi.com/v2 (server-side operations, secret key) and
+    https://secure.culqi.com/v2 (card tokenization and 3DS confirm, public
+    key). Asynchronous payment status is communicated through outbound
+    webhooks (HTTP POST callbacks to the merchant), which are not WebSocket.
+    No realtime, bidirectional ws:// or wss:// endpoint is documented for
+    charges, orders, tokens, subscriptions or events as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.culqi.com/v2
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://secure.culqi.com/v2
+      documented: true
+      note: PCI-scoped host for tokenization (POST /tokens, /tokens/yape) and 3DS charge confirmation (POST /confirm).
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP POST callbacks from Culqi to a merchant-configured URL for account events. Server-to-server, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Culqi API reference, developer documentation or SDKs as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://secure.culqi.com/v2/tokens
+    - POST   https://secure.culqi.com/v2/tokens/yape
+    - POST   https://secure.culqi.com/v2/confirm
+    - POST   https://api.culqi.com/v2/charges
+    - GET    https://api.culqi.com/v2/charges
+    - GET    https://api.culqi.com/v2/charges/{id}
+    - POST   https://api.culqi.com/v2/orders
+    - POST   https://api.culqi.com/v2/refunds
+    - POST   https://api.culqi.com/v2/customers
+    - POST   https://api.culqi.com/v2/cards
+    - POST   https://api.culqi.com/v2/plans
+    - POST   https://api.culqi.com/v2/subscriptions
+    - GET    https://api.culqi.com/v2/events
+    - GET    https://api.culqi.com/v2/iins/{iin}
+    - GET    https://api.culqi.com/v2/transfers
+sources:
+  - url: https://docs.culqi.com/
+    type: Documentation
+    note: Developer documentation describes REST + outbound webhooks; no WebSocket mentioned.
+  - url: https://apidocs.culqi.com/
+    type: APIReference
+    note: API reference lists HTTPS REST operations only (SPA; no downloadable spec).
+  - url: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
+    type: Documentation
+    note: Event delivery is via outbound HTTP webhook callbacks, not WebSocket.
+  - url: https://github.com/culqi/culqi-go/blob/master/client.go
+    type: SourceCode
+    note: Official Go SDK confirms only api.culqi.com/v2 and secure.culqi.com/v2 HTTPS hosts and Bearer auth.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: false
+  reason: |
+    No WebSocket protocol surface exists and no SSE stream is documented.
+    Event delivery is via outbound HTTP webhooks (server-to-server POST
+    callbacks). No AsyncAPI or WebSocket artifact was created; the apis.yml
+    was not modified with an AsyncAPI pointer.

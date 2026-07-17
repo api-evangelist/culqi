@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: modeled-from-docs
+source: https://docs.culqi.com/ + openapi/culqi-openapi.yml
+summary:
+  types:
+  - http
+notes: >-
+  Culqi API v2 uses HTTP Bearer authentication with two key types. Card
+  tokenization and 3DS confirmation on the secure host (secure.culqi.com/v2)
+  use the public key (pk_live_/pk_test_). All server-side money-movement and
+  management operations on the API host (api.culqi.com/v2) use the secret key
+  (sk_live_/sk_test_) and must never be exposed client-side. Keys are issued
+  in the CulqiPanel under Development > API Keys.
+schemes:
+- name: secret_key
+  type: http
+  scheme: bearer
+  bearerFormat: sk_live_/sk_test_ secret key
+  host: https://api.culqi.com/v2
+  usage: Server-side operations (charges, orders, refunds, customers, cards, plans, subscriptions, events, iins, transfers).
+  sources:
+  - openapi/culqi-openapi.yml
+  - https://docs.culqi.com/
+- name: public_key
+  type: http
+  scheme: bearer
+  bearerFormat: pk_live_/pk_test_ public key
+  host: https://secure.culqi.com/v2
+  usage: Client-side card/Yape tokenization (POST /tokens, /tokens/yape) and 3DS charge confirmation (POST /confirm).
+  sources:
+  - openapi/culqi-openapi.yml
+  - https://docs.culqi.com/
+compliance:
+  pciDss: >-
+    Merchants interacting directly with the API (rather than Culqi Checkout /
+    Culqi JS v4 client-side tokenization) must comply with PCI DSS 3.2 and
+    submit an SAQ-D form to Culqi's risk team. Culqi recommends tokenizing
+    card data client-side so raw PAN never touches the merchant server.

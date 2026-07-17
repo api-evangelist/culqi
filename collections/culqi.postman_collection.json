@@ -1,0 +1,1529 @@
+{
+  "info": {
+    "_postman_id": "2439ddc7-8704-4113-a4a8-7fa74f750bc4",
+    "name": "Culqi API v2",
+    "description": "Culqi (Peru) payments API v2. Server-side operations use the secret key (sk_) against {{apiBaseUrl}} = https://api.culqi.com/v2; card/Yape tokenization and 3DS confirm use the public key (pk_) against {{secureBaseUrl}} = https://secure.culqi.com/v2. Amounts are integers in the currency minor unit (cents); currency_code is PEN or USD. Modeled from https://docs.culqi.com/ and the official SDKs (July 2026).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tokens",
+      "item": [
+        {
+          "name": "Create card token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{publicKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{secureBaseUrl}}/tokens",
+              "host": [
+                "{{secureBaseUrl}}"
+              ],
+              "path": [
+                "tokens"
+              ]
+            },
+            "description": "Tokenize a card on the PCI-scoped secure host with the public key.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"cvv\": \"123\",\n  \"expiration_month\": \"09\",\n  \"expiration_year\": \"2028\",\n  \"email\": \"richard@culqi.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create Yape token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{publicKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{secureBaseUrl}}/tokens/yape",
+              "host": [
+                "{{secureBaseUrl}}"
+              ],
+              "path": [
+                "tokens",
+                "yape"
+              ]
+            },
+            "description": "Tokenize a Yape approval code.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1000,\n  \"otp\": \"123456\",\n  \"number_phone\": \"900000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{secureBaseUrl}}/tokens/:id",
+              "host": [
+                "{{secureBaseUrl}}"
+              ],
+              "path": [
+                "tokens",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List tokens",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{secureBaseUrl}}/tokens",
+              "host": [
+                "{{secureBaseUrl}}"
+              ],
+              "path": [
+                "tokens"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "3DS",
+      "item": [
+        {
+          "name": "Confirm 3DS charge",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{publicKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{secureBaseUrl}}/confirm",
+              "host": [
+                "{{secureBaseUrl}}"
+              ],
+              "path": [
+                "confirm"
+              ]
+            },
+            "description": "Confirm a 3-D Secure authenticated charge on the secure host.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token_id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"usermail\": \"richard@culqi.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Charges",
+      "item": [
+        {
+          "name": "Create charge",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/charges",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "charges"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 10000,\n  \"currency_code\": \"PEN\",\n  \"email\": \"richard@culqi.com\",\n  \"source_id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"description\": \"Venta online\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Capture charge",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/charges/:id/capture",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "charges",
+                ":id",
+                "capture"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Get charge",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/charges/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "charges",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List charges",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/charges",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "charges"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Update charge",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/charges/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "charges",
+                ":id"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"order_id\": \"A-100\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/orders",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 10000,\n  \"currency_code\": \"PEN\",\n  \"description\": \"Compra PagoEfectivo\",\n  \"order_number\": \"pedido-001\",\n  \"client_details\": {\n    \"first_name\": \"Richard\",\n    \"last_name\": \"Hendricks\",\n    \"email\": \"richard@culqi.com\",\n    \"phone_number\": \"+51900000001\"\n  },\n  \"expiration_date\": 1893456000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Confirm order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/orders/confirm",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "orders",
+                "confirm"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"ord_test_xxxxxxxxxxxx\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/orders/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/orders",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Delete order",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/orders/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Refunds",
+      "item": [
+        {
+          "name": "Create refund",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/refunds",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000,\n  \"charge_id\": \"chr_test_xxxxxxxxxxxx\",\n  \"reason\": \"solicitud_comprador\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get refund",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/refunds/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "refunds",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List refunds",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/refunds",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/customers",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Richard\",\n  \"last_name\": \"Hendricks\",\n  \"email\": \"richard@culqi.com\",\n  \"address\": \"Av. Larco 1301\",\n  \"address_city\": \"Lima\",\n  \"country_code\": \"PE\",\n  \"phone_number\": \"+51900000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get customer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/customers/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/customers",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Update customer",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/customers/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"tier\": \"gold\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete customer",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/customers/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "item": [
+        {
+          "name": "Create card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/cards",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"cus_test_xxxxxxxxxxxx\",\n  \"token_id\": \"tkn_test_xxxxxxxxxxxx\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get card",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/cards/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "cards",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List cards",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/cards",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Update card",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/cards/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "cards",
+                ":id"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token_id\": \"tkn_test_yyyyyyyyyyyy\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete card",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/cards/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "cards",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plans",
+      "item": [
+        {
+          "name": "Create plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/plans",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "plans"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plan mensual\",\n  \"amount\": 9900,\n  \"currency_code\": \"PEN\",\n  \"interval_unit_time\": 3,\n  \"interval_count\": 1,\n  \"limit\": 12\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get plan",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/plans/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "plans",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List plans",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/plans",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "plans"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Delete plan",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/plans/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "plans",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "Create subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/subscriptions",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_id\": \"crd_test_xxxxxxxxxxxx\",\n  \"plan_id\": \"pln_test_xxxxxxxxxxxx\",\n  \"tyc\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get subscription",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/subscriptions/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "subscriptions",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "List subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/subscriptions",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Cancel subscription",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/subscriptions/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "subscriptions",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/events",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Get event",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/events/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "events",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Iins",
+      "item": [
+        {
+          "name": "Get IIN metadata",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/iins/:iin",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "iins",
+                ":iin"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transfers",
+      "item": [
+        {
+          "name": "List transfers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/transfers",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "transfers"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "before",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Get transfer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{secretKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{apiBaseUrl}}/transfers/:id",
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "path": [
+                "transfers",
+                ":id"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{secretKey}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "apiBaseUrl",
+      "value": "https://api.culqi.com/v2"
+    },
+    {
+      "key": "secureBaseUrl",
+      "value": "https://secure.culqi.com/v2"
+    },
+    {
+      "key": "secretKey",
+      "value": "sk_test_xxxxxxxxxxxxxxxx"
+    },
+    {
+      "key": "publicKey",
+      "value": "pk_test_xxxxxxxxxxxxxxxx"
+    }
+  ]
+}

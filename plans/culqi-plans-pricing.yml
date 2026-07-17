@@ -1,0 +1,145 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Culqi
+providerId: culqi
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- FinTech
+- Peru
+- Plans
+- Pricing
+description: >-
+  Culqi has no subscription or per-call API pricing. Access to the developer
+  API is free; Culqi earns a per-transaction merchant discount rate (comision)
+  on each successful payment, quoted in Peruvian Soles (PEN) plus IGV (Peru's
+  18% VAT). Rates vary by payment method and card origin, with a fixed minimum
+  commission on small-ticket transactions. Card data can be tokenized for free
+  with Culqi Checkout / Culqi JS v4.
+notes: >-
+  Representative merchant rates published on the Culqi pricing page as of
+  July 2026; commissions are subject to negotiation for higher volumes and to
+  change. All percentages are exclusive of IGV (18%). USD-denominated
+  per-transaction fixed fees apply to online card charges. Verify current
+  rates at https://culqi.com/precios/ during reconciliation.
+sources:
+- https://culqi.com/precios/
+- https://docs.culqi.com/
+billingCurrency: PEN
+plans:
+- id: culqi-online
+  name: Online payments (CulqiOnline / CulqiLink)
+  type: usage
+  description: >-
+    Per-transaction merchant discount rate on online card charges accepted via
+    the API, hosted checkout or payment links.
+  entries:
+  - label: National cards (online)
+    name: cards_national_online
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PE
+    unit: 1
+    price: 3.44% + USD 0.20 + IGV per transaction
+    userMultiplied: false
+  - label: International cards (online)
+    name: cards_international_online
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: global
+    unit: 1
+    price: 3.99% + USD 0.20 + IGV per transaction
+    userMultiplied: false
+  elements:
+  - name: Charges API
+  - name: Tokens API
+  - name: Cuotealo installments
+- id: culqi-yape
+  name: Yape via Culqi
+  type: usage
+  description: >-
+    Per-transaction rate for payments accepted through Yape (BCP mobile
+    wallet) via Culqi.
+  entries:
+  - label: Yape payment
+    name: yape_payment
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PE
+    unit: 1
+    price: 3.44% + IGV per transaction
+    userMultiplied: false
+  elements:
+  - name: Yape token + Charges API
+- id: culqi-pagoefectivo
+  name: PagoEfectivo / cash agents via Culqi
+  type: usage
+  description: >-
+    Per-transaction rate for asynchronous cash / agent payments via
+    PagoEfectivo (CIP code) accepted through the Orders API, with a fixed
+    minimum on small tickets.
+  entries:
+  - label: PagoEfectivo payment
+    name: pagoefectivo_payment
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PE
+    unit: 1
+    price: 3.99% + IGV; minimum S/3.50 for tickets under S/87.72
+    userMultiplied: false
+  elements:
+  - name: Orders API
+- id: culqi-full-pos
+  name: CulqiFull (in-person POS)
+  type: usage
+  description: >-
+    Per-transaction rate for in-person card payments taken on the CulqiFull
+    POS device (out of scope for the API but part of the same merchant
+    pricing).
+  entries:
+  - label: In-person card
+    name: cards_in_person
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PE
+    unit: 1
+    price: 3.44% + IGV per transaction
+    userMultiplied: false
+  elements:
+  - name: POS terminal
+- id: culqi-enterprise
+  name: Negotiated / volume
+  type: enterprise
+  description: >-
+    High-volume merchants can negotiate custom discount rates with Culqi
+    sales. Contact Culqi.
+  entries:
+  - label: Negotiated rate
+    name: negotiated
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: PE
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom volume pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

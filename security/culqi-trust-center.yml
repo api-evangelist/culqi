@@ -1,0 +1,30 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+source: https://docs.culqi.com/ + https://culqi.com/
+certifications:
+- PCI DSS Level 1
+evidence:
+- source: https://docs.culqi.com/
+  keywords:
+  - pci dss
+  - pci dss 3.2
+  - saq-d
+  - tokenizacion
+  - 3ds
+  - antifraude
+- source: https://culqi.com/
+  keywords:
+  - pci dss
+  - seguridad
+notes: >-
+  Culqi is a PCI DSS Level 1 compliant payment processor; card data is
+  tokenized client-side (Culqi Checkout / Culqi JS v4) so raw card numbers do
+  not touch merchant servers. Merchants that call the API directly with raw
+  card data must themselves comply with PCI DSS 3.2 and submit an SAQ-D.
+  Culqi provides 3-D Secure (Culqi 3DS) and antifraud (antifraude) device
+  fingerprinting for card-not-present risk control. As a Grupo Credicorp /
+  Krealo company, Culqi operates under Peru's financial-sector regulatory
+  regime (SBS). No standalone public trust-center portal (e.g. a Vanta/Drata
+  trust page) was located at probe time; compliance is documented within the
+  developer docs and corporate site.
