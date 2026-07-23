@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Culqi API v2 3DS Subscriptions API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  termsOfService: https://culqi.com/terminos_y_condiciones/
+  contact:
+    name: Culqi Developer Support
+    url: https://docs.culqi.com/
+  version: '2.0'
+servers:
+- url: https://api.culqi.com/v2
+  description: Server-side host for charges, orders, refunds, customers, cards, plans, subscriptions, events, iins and transfers (authenticated with a secret key, sk_).
+- url: https://secure.culqi.com/v2
+  description: PCI-scoped host for card tokenization and 3DS charge confirmation (authenticated with a public key, pk_).
+tags:
+- name: Subscriptions
+  description: Subscriptions linking a saved card to a plan.
+paths:
+  /subscriptions:
+    post:
+      operationId: createSubscription
+      tags:
+      - Subscriptions
+      summary: Create a subscription
+      description: Subscribes a saved card to a plan for recurring charges.
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: listSubscriptions
+      tags:
+      - Subscriptions
+      summary: List subscriptions
+      security:
+      - secretKey: []
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Before'
+      - $ref: '#/components/parameters/After'
+      responses:
+        '200':
+          description: A paginated list of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionList'
+  /subscriptions/{id}:
+    parameters:
+    - $ref: '#/components/parameters/ResourceId'
+    get:
+      operationId: getSubscription
+      tags:
+      - Subscriptions
+      summary: Retrieve a subscription
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Subscription object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          $ref: '#/components/responses/Error'
+    patch:
+      operationId: updateSubscription
+      tags:
+      - Subscriptions
+      summary: Update a subscription
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataUpdate'
+      responses:
+        '200':
+          description: Updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    delete:
+      operationId: deleteSubscription
+      tags:
+      - Subscriptions
+      summary: Cancel a subscription
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Cancellation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deleted'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+  schemas:
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+            cursors:
+              type: object
+              properties:
+                before:
+                  type: string
+                  nullable: true
+                after:
+                  type: string
+                  nullable: true
+    Subscription:
+      type: object
+      properties:
+        object:
+          type: string
+          example: subscription
+        id:
+          type: string
+          example: sxn_test_xxxxxxxxxxxx
+        status:
+          type: integer
+        plan_id:
+          type: string
+        card_id:
+          type: string
+        creation_date:
+          type: integer
+        next_billing_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Deleted:
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
+    SubscriptionList:
+      $ref: '#/components/schemas/PaginatedList'
+    CreateSubscriptionRequest:
+      type: object
+      required:
+      - card_id
+      - plan_id
+      properties:
+        card_id:
+          type: string
+        plan_id:
+          type: string
+        tyc:
+          type: boolean
+          description: Acceptance of terms and conditions.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    secretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_/sk_test_ secret key
+      description: 'Server-side secret key sent as an HTTP Bearer token in the Authorization header, e.g. `Authorization: Bearer sk_live_...`.'
+    publicKey:
+      type: http
+      scheme: bearer
+      bearerFormat: pk_live_/pk_test_ public key
+      description: 'Public key sent as an HTTP Bearer token for tokenization and 3DS confirm on the secure host, e.g. `Authorization: Bearer pk_live_...`.'

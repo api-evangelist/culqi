@@ -1,0 +1,343 @@
+openapi: 3.0.3
+info:
+  title: Culqi API v2 3DS Tokens API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  termsOfService: https://culqi.com/terminos_y_condiciones/
+  contact:
+    name: Culqi Developer Support
+    url: https://docs.culqi.com/
+  version: '2.0'
+servers:
+- url: https://api.culqi.com/v2
+  description: Server-side host for charges, orders, refunds, customers, cards, plans, subscriptions, events, iins and transfers (authenticated with a secret key, sk_).
+- url: https://secure.culqi.com/v2
+  description: PCI-scoped host for card tokenization and 3DS charge confirmation (authenticated with a public key, pk_).
+tags:
+- name: Tokens
+  description: Client-side tokenization of card and Yape credentials on the secure host.
+paths:
+  /tokens:
+    servers:
+    - url: https://secure.culqi.com/v2
+    post:
+      operationId: createToken
+      tags:
+      - Tokens
+      summary: Create a card token
+      description: Tokenizes card data on the PCI-scoped secure host using the public key (pk_). The resulting token id (tkn_...) is single-use and is passed as source_id when creating a charge.
+      security:
+      - publicKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequest'
+      responses:
+        '201':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: listTokens
+      tags:
+      - Tokens
+      summary: List tokens
+      security:
+      - secretKey: []
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Before'
+      - $ref: '#/components/parameters/After'
+      responses:
+        '200':
+          description: A paginated list of tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenList'
+  /tokens/yape:
+    servers:
+    - url: https://secure.culqi.com/v2
+    post:
+      operationId: createYapeToken
+      tags:
+      - Tokens
+      summary: Create a Yape token
+      description: Tokenizes a Yape (BCP mobile wallet) approval code and phone number into a single-use token (ype_...) for use as a charge source_id.
+      security:
+      - publicKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateYapeTokenRequest'
+      responses:
+        '201':
+          description: Yape token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/Error'
+  /tokens/{id}:
+    servers:
+    - url: https://secure.culqi.com/v2
+    parameters:
+    - $ref: '#/components/parameters/ResourceId'
+    get:
+      operationId: getToken
+      tags:
+      - Tokens
+      summary: Retrieve a token
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Token object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '404':
+          $ref: '#/components/responses/Error'
+    patch:
+      operationId: updateToken
+      tags:
+      - Tokens
+      summary: Update token metadata
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataUpdate'
+      responses:
+        '200':
+          description: Updated token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+  schemas:
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    TokenList:
+      $ref: '#/components/schemas/PaginatedList'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Iin:
+      type: object
+      properties:
+        object:
+          type: string
+          example: iin
+        bin:
+          type: string
+        card_brand:
+          type: string
+          example: Visa
+        card_type:
+          type: string
+          example: credito
+        card_category:
+          type: string
+        issuer:
+          type: object
+          properties:
+            name:
+              type: string
+            country:
+              type: string
+            country_code:
+              type: string
+        installments_allowed:
+          type: array
+          items:
+            type: integer
+    CreateTokenRequest:
+      type: object
+      required:
+      - card_number
+      - cvv
+      - expiration_month
+      - expiration_year
+      - email
+      properties:
+        card_number:
+          type: string
+          example: '4111111111111111'
+        cvv:
+          type: string
+          example: '123'
+        expiration_month:
+          type: string
+          example: 09
+        expiration_year:
+          type: string
+          example: '2028'
+        email:
+          type: string
+          format: email
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+            cursors:
+              type: object
+              properties:
+                before:
+                  type: string
+                  nullable: true
+                after:
+                  type: string
+                  nullable: true
+    Token:
+      type: object
+      properties:
+        object:
+          type: string
+          example: token
+        id:
+          type: string
+          example: tkn_test_xxxxxxxxxxxx
+        type:
+          type: string
+          example: card
+        email:
+          type: string
+        creation_date:
+          type: integer
+        card_number:
+          type: string
+          example: 411111******1111
+        last_four:
+          type: string
+        active:
+          type: boolean
+        iin:
+          $ref: '#/components/schemas/Iin'
+        client:
+          type: object
+          additionalProperties: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
+    CreateYapeTokenRequest:
+      type: object
+      required:
+      - amount
+      - otp
+      - number_phone
+      properties:
+        amount:
+          type: integer
+          description: Amount in minor units (cents).
+        otp:
+          type: string
+          description: Yape approval code entered by the payer.
+        number_phone:
+          type: string
+          description: Payer Yape phone number.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    secretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_/sk_test_ secret key
+      description: 'Server-side secret key sent as an HTTP Bearer token in the Authorization header, e.g. `Authorization: Bearer sk_live_...`.'
+    publicKey:
+      type: http
+      scheme: bearer
+      bearerFormat: pk_live_/pk_test_ public key
+      description: 'Public key sent as an HTTP Bearer token for tokenization and 3DS confirm on the secure host, e.g. `Authorization: Bearer pk_live_...`.'

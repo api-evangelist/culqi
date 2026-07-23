@@ -1,0 +1,330 @@
+openapi: 3.0.3
+info:
+  title: Culqi API v2 3DS Orders API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  termsOfService: https://culqi.com/terminos_y_condiciones/
+  contact:
+    name: Culqi Developer Support
+    url: https://docs.culqi.com/
+  version: '2.0'
+servers:
+- url: https://api.culqi.com/v2
+  description: Server-side host for charges, orders, refunds, customers, cards, plans, subscriptions, events, iins and transfers (authenticated with a secret key, sk_).
+- url: https://secure.culqi.com/v2
+  description: PCI-scoped host for card tokenization and 3DS charge confirmation (authenticated with a public key, pk_).
+tags:
+- name: Orders
+  description: Payment orders for PagoEfectivo (CIP) and bank-transfer / cash-agent flows.
+paths:
+  /orders:
+    post:
+      operationId: createOrder
+      tags:
+      - Orders
+      summary: Create an order
+      description: Creates a payment order used by asynchronous methods such as PagoEfectivo (generates a CIP code) and bank transfers. amount is an integer in the currency minor unit.
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: listOrders
+      tags:
+      - Orders
+      summary: List orders
+      security:
+      - secretKey: []
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Before'
+      - $ref: '#/components/parameters/After'
+      responses:
+        '200':
+          description: A paginated list of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/{id}:
+    parameters:
+    - $ref: '#/components/parameters/ResourceId'
+    get:
+      operationId: getOrder
+      tags:
+      - Orders
+      summary: Retrieve an order
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Order object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          $ref: '#/components/responses/Error'
+    patch:
+      operationId: updateOrder
+      tags:
+      - Orders
+      summary: Update order metadata
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataUpdate'
+      responses:
+        '200':
+          description: Updated order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      operationId: deleteOrder
+      tags:
+      - Orders
+      summary: Delete an order
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deleted'
+  /orders/confirm:
+    post:
+      operationId: confirmOrder
+      tags:
+      - Orders
+      summary: Confirm an order
+      description: Confirms an order, generating the payment instrument (e.g. PagoEfectivo CIP) for the customer.
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmOrderRequest'
+      responses:
+        '200':
+          description: Confirmed order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+  schemas:
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    OrderList:
+      $ref: '#/components/schemas/PaginatedList'
+    CreateOrderRequest:
+      type: object
+      required:
+      - amount
+      - currency_code
+      - description
+      - order_number
+      - client_details
+      - expiration_date
+      properties:
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        description:
+          type: string
+        order_number:
+          type: string
+        client_details:
+          type: object
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            email:
+              type: string
+            phone_number:
+              type: string
+        expiration_date:
+          type: integer
+          description: Unix timestamp when the order (e.g. PagoEfectivo CIP) expires.
+        payment_methods:
+          type: object
+          additionalProperties: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+            cursors:
+              type: object
+              properties:
+                before:
+                  type: string
+                  nullable: true
+                after:
+                  type: string
+                  nullable: true
+    Order:
+      type: object
+      properties:
+        object:
+          type: string
+          example: order
+        id:
+          type: string
+          example: ord_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        state:
+          type: string
+          example: created
+        order_number:
+          type: string
+        cip_code:
+          type: string
+          description: PagoEfectivo CIP payment code, when applicable.
+        expiration_date:
+          type: integer
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
+    ConfirmOrderRequest:
+      type: object
+      required:
+      - order_id
+      properties:
+        order_id:
+          type: string
+    Deleted:
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    secretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_/sk_test_ secret key
+      description: 'Server-side secret key sent as an HTTP Bearer token in the Authorization header, e.g. `Authorization: Bearer sk_live_...`.'
+    publicKey:
+      type: http
+      scheme: bearer
+      bearerFormat: pk_live_/pk_test_ public key
+      description: 'Public key sent as an HTTP Bearer token for tokenization and 3DS confirm on the secure host, e.g. `Authorization: Bearer pk_live_...`.'

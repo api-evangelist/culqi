@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Culqi API v2 3DS Iins API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  termsOfService: https://culqi.com/terminos_y_condiciones/
+  contact:
+    name: Culqi Developer Support
+    url: https://docs.culqi.com/
+  version: '2.0'
+servers:
+- url: https://api.culqi.com/v2
+  description: Server-side host for charges, orders, refunds, customers, cards, plans, subscriptions, events, iins and transfers (authenticated with a secret key, sk_).
+- url: https://secure.culqi.com/v2
+  description: PCI-scoped host for card tokenization and 3DS charge confirmation (authenticated with a public key, pk_).
+tags:
+- name: Iins
+  description: Card BIN / IIN metadata lookup.
+paths:
+  /iins/{iin}:
+    parameters:
+    - name: iin
+      in: path
+      required: true
+      description: The card IIN/BIN (first 6 or 8 digits).
+      schema:
+        type: string
+    get:
+      operationId: getIin
+      tags:
+      - Iins
+      summary: Look up card IIN metadata
+      description: Returns brand, card type, issuer and country information for a card IIN/BIN.
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: IIN metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iin'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Iin:
+      type: object
+      properties:
+        object:
+          type: string
+          example: iin
+        bin:
+          type: string
+        card_brand:
+          type: string
+          example: Visa
+        card_type:
+          type: string
+          example: credito
+        card_category:
+          type: string
+        issuer:
+          type: object
+          properties:
+            name:
+              type: string
+            country:
+              type: string
+            country_code:
+              type: string
+        installments_allowed:
+          type: array
+          items:
+            type: integer
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    secretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_/sk_test_ secret key
+      description: 'Server-side secret key sent as an HTTP Bearer token in the Authorization header, e.g. `Authorization: Bearer sk_live_...`.'
+    publicKey:
+      type: http
+      scheme: bearer
+      bearerFormat: pk_live_/pk_test_ public key
+      description: 'Public key sent as an HTTP Bearer token for tokenization and 3DS confirm on the secure host, e.g. `Authorization: Bearer pk_live_...`.'

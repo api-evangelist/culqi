@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: Culqi API v2 3DS Charges API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  termsOfService: https://culqi.com/terminos_y_condiciones/
+  contact:
+    name: Culqi Developer Support
+    url: https://docs.culqi.com/
+  version: '2.0'
+servers:
+- url: https://api.culqi.com/v2
+  description: Server-side host for charges, orders, refunds, customers, cards, plans, subscriptions, events, iins and transfers (authenticated with a secret key, sk_).
+- url: https://secure.culqi.com/v2
+  description: PCI-scoped host for card tokenization and 3DS charge confirmation (authenticated with a public key, pk_).
+tags:
+- name: Charges
+  description: One-time charges (cargos) against a token or saved card.
+paths:
+  /charges:
+    post:
+      operationId: createCharge
+      tags:
+      - Charges
+      summary: Create a charge
+      description: Creates a one-time charge (cargo) against a token, saved card or Yape token. amount is an integer in the currency minor unit (cents), currency_code is PEN or USD.
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChargeRequest'
+      responses:
+        '201':
+          description: Charge created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+        '400':
+          $ref: '#/components/responses/Error'
+        '402':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: listCharges
+      tags:
+      - Charges
+      summary: List charges
+      security:
+      - secretKey: []
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Before'
+      - $ref: '#/components/parameters/After'
+      responses:
+        '200':
+          description: A paginated list of charges
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeList'
+  /charges/{id}:
+    parameters:
+    - $ref: '#/components/parameters/ResourceId'
+    get:
+      operationId: getCharge
+      tags:
+      - Charges
+      summary: Retrieve a charge
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Charge object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+        '404':
+          $ref: '#/components/responses/Error'
+    patch:
+      operationId: updateCharge
+      tags:
+      - Charges
+      summary: Update charge metadata
+      security:
+      - secretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataUpdate'
+      responses:
+        '200':
+          description: Updated charge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+  /charges/{id}/capture:
+    parameters:
+    - $ref: '#/components/parameters/ResourceId'
+    post:
+      operationId: captureCharge
+      tags:
+      - Charges
+      summary: Capture a pre-authorized charge
+      description: Captures a charge that was created with capture=false (authorization hold).
+      security:
+      - secretKey: []
+      responses:
+        '200':
+          description: Captured charge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+  schemas:
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    Charge:
+      type: object
+      properties:
+        object:
+          type: string
+          example: charge
+        id:
+          type: string
+          example: chr_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        amount_refunded:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        email:
+          type: string
+        description:
+          type: string
+        source:
+          type: object
+          additionalProperties: true
+        outcome:
+          type: object
+          additionalProperties: true
+        capture:
+          type: boolean
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    CreateChargeRequest:
+      type: object
+      required:
+      - amount
+      - currency_code
+      - email
+      - source_id
+      properties:
+        amount:
+          type: integer
+          description: Amount to charge in the currency minor unit (cents), e.g. 10000 = S/100.00.
+          example: 10000
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        email:
+          type: string
+          format: email
+        source_id:
+          type: string
+          description: Token id (tkn_...), Yape token (ype_...) or saved card id (crd_...).
+        description:
+          type: string
+          maxLength: 80
+        capture:
+          type: boolean
+          description: When false, creates an authorization hold to be captured later.
+          default: true
+        installments:
+          type: integer
+          description: Number of installments for Cuotealo (installment) payments.
+        antifraud_details:
+          type: object
+          additionalProperties: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+            cursors:
+              type: object
+              properties:
+                before:
+                  type: string
+                  nullable: true
+                after:
+                  type: string
+                  nullable: true
+    ChargeList:
+      $ref: '#/components/schemas/PaginatedList'
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    secretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_/sk_test_ secret key
+      description: 'Server-side secret key sent as an HTTP Bearer token in the Authorization header, e.g. `Authorization: Bearer sk_live_...`.'
+    publicKey:
+      type: http
+      scheme: bearer
+      bearerFormat: pk_live_/pk_test_ public key
+      description: 'Public key sent as an HTTP Bearer token for tokenization and 3DS confirm on the secure host, e.g. `Authorization: Bearer pk_live_...`.'
