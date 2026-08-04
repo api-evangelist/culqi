@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "2261fea9-6492-4e45-bcd0-57ae0ce3b0d8",
+    "name": "Culqi API v2 3DS Events API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:27.000Z",
+    "updatedAt": "2026-07-28T01:27:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2261fea9-6492-4e45-bcd0-57ae0ce3b0d8"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve an event",
+              "id": "a220e483-522a-4b3a-8c1f-126ffd55bbc7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0c480f89-bec5-4d04-81d3-821e36fc478c",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "96ade62f-6820-49c8-947e-f3a458493fcb",
+                  "name": "Event object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"data\": {\n    \"Duis7f_\": false,\n    \"pariatur_b5\": true,\n    \"dolored3\": \"dolor nulla\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:28.000Z",
+                  "updatedAt": "2026-07-28T01:27:28.000Z",
+                  "uid": "35240-96ade62f-6820-49c8-947e-f3a458493fcb"
+                },
+                {
+                  "id": "8c82e8e5-33bf-48cd-98f0-b92746712472",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:28.000Z",
+                  "updatedAt": "2026-07-28T01:27:28.000Z",
+                  "uid": "35240-8c82e8e5-33bf-48cd-98f0-b92746712472"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:28.000Z",
+              "updatedAt": "2026-07-28T01:27:28.000Z",
+              "uid": "35240-a220e483-522a-4b3a-8c1f-126ffd55bbc7"
+            }
+          ],
+          "id": "ade0fa21-f531-45d3-8035-fdface67b117",
+          "createdAt": "2026-07-28T01:27:28.000Z",
+          "updatedAt": "2026-07-28T01:27:28.000Z",
+          "uid": "35240-ade0fa21-f531-45d3-8035-fdface67b117"
+        },
+        {
+          "name": "List webhook events",
+          "id": "51b8be90-36c8-4cb3-a19d-a8e6badba218",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Lists account events (charge.creation.succeeded, order.status.changed, etc.) delivered to webhooks."
+          },
+          "response": [
+            {
+              "id": "dbb0aafc-c326-4eb2-bb6d-07d3f05c24ce",
+              "name": "A paginated list of events",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"esse4\": \"consequat elit in\"\n    },\n    {\n      \"ex_b\": 5704724\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:28.000Z",
+              "updatedAt": "2026-07-28T01:27:28.000Z",
+              "uid": "35240-dbb0aafc-c326-4eb2-bb6d-07d3f05c24ce"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:28.000Z",
+          "updatedAt": "2026-07-28T01:27:28.000Z",
+          "uid": "35240-51b8be90-36c8-4cb3-a19d-a8e6badba218"
+        }
+      ],
+      "id": "a8077552-e223-4fe8-946f-64766f7789ed",
+      "createdAt": "2026-07-28T01:27:28.000Z",
+      "updatedAt": "2026-07-28T01:27:28.000Z",
+      "uid": "35240-a8077552-e223-4fe8-946f-64766f7789ed"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

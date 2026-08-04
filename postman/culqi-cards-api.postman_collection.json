@@ -1,0 +1,688 @@
+{
+  "info": {
+    "_postman_id": "c5ee5055-9983-4c94-8757-fd5eb393c50c",
+    "name": "Culqi API v2 3DS Cards API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:24.000Z",
+    "updatedAt": "2026-07-28T01:27:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c5ee5055-9983-4c94-8757-fd5eb393c50c"
+  },
+  "item": [
+    {
+      "name": "cards",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a card",
+              "id": "6e8c3da0-1284-4ff9-9c26-52248afa925b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/cards/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b01c8f28-929a-42f6-9fa6-3c8a50f5cbd9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "55da9572-41eb-4ff5-86c7-f10aa7146bdc",
+                  "name": "Card object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"source\": {\n    \"doloref\": false,\n    \"proidenta\": 93781679,\n    \"veniam5__\": 22823948.615058362,\n    \"tempor_f\": \"mollit pariatur\"\n  },\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"do3\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:25.000Z",
+                  "updatedAt": "2026-07-28T01:27:25.000Z",
+                  "uid": "35240-55da9572-41eb-4ff5-86c7-f10aa7146bdc"
+                },
+                {
+                  "id": "3ed31f0a-b7bd-4325-b997-01e69210a206",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:25.000Z",
+                  "updatedAt": "2026-07-28T01:27:25.000Z",
+                  "uid": "35240-3ed31f0a-b7bd-4325-b997-01e69210a206"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-6e8c3da0-1284-4ff9-9c26-52248afa925b"
+            },
+            {
+              "name": "Update a card",
+              "id": "02d4a51e-69f6-4619-adc2-0628b4c4d46f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"<string>\",\n  \"metadata\": {\n    \"elit_70\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cards/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "426a10a4-8133-4621-805d-2361e9653e1a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f157d720-7969-40e6-bd39-152ab70af24e",
+                  "name": "Updated card",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token_id\": \"<string>\",\n  \"metadata\": {\n    \"elit_70\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"source\": {\n    \"doloref\": false,\n    \"proidenta\": 93781679,\n    \"veniam5__\": 22823948.615058362,\n    \"tempor_f\": \"mollit pariatur\"\n  },\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"do3\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:25.000Z",
+                  "updatedAt": "2026-07-28T01:27:25.000Z",
+                  "uid": "35240-f157d720-7969-40e6-bd39-152ab70af24e"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-02d4a51e-69f6-4619-adc2-0628b4c4d46f"
+            },
+            {
+              "name": "Delete a card",
+              "id": "2bd581f4-0b84-40c4-a048-983ad10a462b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/cards/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bed53b0e-5e66-42fc-bc78-4a88b38cc272",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0ac0f73f-4c52-43a8-878f-2b34c8c6d5b2",
+                  "name": "Deletion result",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"deleted\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"merchant_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:25.000Z",
+                  "updatedAt": "2026-07-28T01:27:25.000Z",
+                  "uid": "35240-0ac0f73f-4c52-43a8-878f-2b34c8c6d5b2"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-2bd581f4-0b84-40c4-a048-983ad10a462b"
+            }
+          ],
+          "id": "c0ccc4be-634b-4fde-8b19-86c65bfa5372",
+          "createdAt": "2026-07-28T01:27:25.000Z",
+          "updatedAt": "2026-07-28T01:27:25.000Z",
+          "uid": "35240-c0ccc4be-634b-4fde-8b19-86c65bfa5372"
+        },
+        {
+          "name": "Create a card",
+          "id": "4df12e1e-fa12-4687-a388-325fa39cb0b0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"<string>\",\n  \"token_id\": \"<string>\",\n  \"validate\": \"<boolean>\",\n  \"metadata\": {\n    \"veniam_05\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cards",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ]
+            },
+            "description": "Saves a card to a customer by associating a token with a customer id."
+          },
+          "response": [
+            {
+              "id": "d1a49395-4571-404f-8eb3-bf74213721e3",
+              "name": "Card created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"token_id\": \"<string>\",\n  \"validate\": \"<boolean>\",\n  \"metadata\": {\n    \"veniam_05\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cards",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"source\": {\n    \"doloref\": false,\n    \"proidenta\": 93781679,\n    \"veniam5__\": 22823948.615058362,\n    \"tempor_f\": \"mollit pariatur\"\n  },\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"do3\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-d1a49395-4571-404f-8eb3-bf74213721e3"
+            },
+            {
+              "id": "cc36b01e-6854-4974-9d5f-1d1fae21f0cd",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"token_id\": \"<string>\",\n  \"validate\": \"<boolean>\",\n  \"metadata\": {\n    \"veniam_05\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cards",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-cc36b01e-6854-4974-9d5f-1d1fae21f0cd"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:25.000Z",
+          "updatedAt": "2026-07-28T01:27:25.000Z",
+          "uid": "35240-4df12e1e-fa12-4687-a388-325fa39cb0b0"
+        },
+        {
+          "name": "List cards",
+          "id": "40742193-7cab-4e44-880c-4aaed4caf157",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cards?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea5f0d7c-c88c-4504-a50f-e3792149bcd9",
+              "name": "A paginated list of cards",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/cards?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cards"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"proident_9\": -77085478.67236431,\n      \"elit_50\": -42152472.99644758\n    },\n    {\n      \"reprehenderite\": 82215538.19111079\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:25.000Z",
+              "updatedAt": "2026-07-28T01:27:25.000Z",
+              "uid": "35240-ea5f0d7c-c88c-4504-a50f-e3792149bcd9"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:25.000Z",
+          "updatedAt": "2026-07-28T01:27:25.000Z",
+          "uid": "35240-40742193-7cab-4e44-880c-4aaed4caf157"
+        }
+      ],
+      "id": "d0dd8357-e638-4713-ba54-19177c88022f",
+      "createdAt": "2026-07-28T01:27:25.000Z",
+      "updatedAt": "2026-07-28T01:27:25.000Z",
+      "uid": "35240-d0dd8357-e638-4713-ba54-19177c88022f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

@@ -1,0 +1,687 @@
+{
+  "info": {
+    "_postman_id": "142e65f7-66df-4768-a859-d20972d417ad",
+    "name": "Culqi API v2 3DS Customers API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:26.000Z",
+    "updatedAt": "2026-07-28T01:27:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-142e65f7-66df-4768-a859-d20972d417ad"
+  },
+  "item": [
+    {
+      "name": "customers",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a customer",
+              "id": "5160cc5b-e869-47d5-8f03-4dc9c8734a83",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "89607644-1c6b-4b28-8c44-edf656eb7684",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3a78e9ff-5ce9-4d52-85a6-feb3af4e0769",
+                  "name": "Customer object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"cards\": [\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"id_d\": \"deserunt Duis nulla incididunt\"\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"velit2\": \"<string>\"\n      }\n    },\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"nisif\": 62281903\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"esse05\": \"<string>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"culpa_24a\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:27.000Z",
+                  "updatedAt": "2026-07-28T01:27:27.000Z",
+                  "uid": "35240-3a78e9ff-5ce9-4d52-85a6-feb3af4e0769"
+                },
+                {
+                  "id": "e60d301a-0782-4008-9a94-c50bc6991afa",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:27.000Z",
+                  "updatedAt": "2026-07-28T01:27:27.000Z",
+                  "uid": "35240-e60d301a-0782-4008-9a94-c50bc6991afa"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-5160cc5b-e869-47d5-8f03-4dc9c8734a83"
+            },
+            {
+              "name": "Update a customer",
+              "id": "faa67296-e676-4616-9fc1-d2d13cc9c8f1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address_city\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"metadata\": {\n    \"non4\": \"<string>\",\n    \"dolordb\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5f924b91-ed41-4660-9a2a-e69c165fcebe",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "537ef8a5-df48-4446-ad4d-42bf09659b0e",
+                  "name": "Updated customer",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address_city\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"metadata\": {\n    \"non4\": \"<string>\",\n    \"dolordb\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"cards\": [\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"id_d\": \"deserunt Duis nulla incididunt\"\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"velit2\": \"<string>\"\n      }\n    },\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"nisif\": 62281903\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"esse05\": \"<string>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"culpa_24a\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:27.000Z",
+                  "updatedAt": "2026-07-28T01:27:27.000Z",
+                  "uid": "35240-537ef8a5-df48-4446-ad4d-42bf09659b0e"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-faa67296-e676-4616-9fc1-d2d13cc9c8f1"
+            },
+            {
+              "name": "Delete a customer",
+              "id": "a9c1e46e-06ae-451e-921b-cbf9e68387e0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "63cccae3-91db-4d88-82d5-b47e1cfe8de5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "06abbec9-bff6-482f-9a44-40452cc41276",
+                  "name": "Deletion result",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"deleted\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"merchant_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:27.000Z",
+                  "updatedAt": "2026-07-28T01:27:27.000Z",
+                  "uid": "35240-06abbec9-bff6-482f-9a44-40452cc41276"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-a9c1e46e-06ae-451e-921b-cbf9e68387e0"
+            }
+          ],
+          "id": "91736b84-9e0a-48cd-94d8-76431fee594d",
+          "createdAt": "2026-07-28T01:27:27.000Z",
+          "updatedAt": "2026-07-28T01:27:27.000Z",
+          "uid": "35240-91736b84-9e0a-48cd-94d8-76431fee594d"
+        },
+        {
+          "name": "Create a customer",
+          "id": "47cfb0e5-14c5-4be2-b08c-b6746bd64d12",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address_city\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"metadata\": {\n    \"non4\": \"<string>\",\n    \"dolordb\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a2bb161-0c70-4263-beed-4c70afa27a39",
+              "name": "Customer created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address_city\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"metadata\": {\n    \"non4\": \"<string>\",\n    \"dolordb\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"cards\": [\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"id_d\": \"deserunt Duis nulla incididunt\"\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"velit2\": \"<string>\"\n      }\n    },\n    {\n      \"object\": \"<string>\",\n      \"id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"source\": {\n        \"nisif\": 62281903\n      },\n      \"creation_date\": \"<integer>\",\n      \"metadata\": {\n        \"esse05\": \"<string>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"culpa_24a\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-3a2bb161-0c70-4263-beed-4c70afa27a39"
+            },
+            {
+              "id": "d479ffc2-9dda-4616-b51f-35a1a164ada1",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address_city\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"metadata\": {\n    \"non4\": \"<string>\",\n    \"dolordb\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-d479ffc2-9dda-4616-b51f-35a1a164ada1"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:27.000Z",
+          "updatedAt": "2026-07-28T01:27:27.000Z",
+          "uid": "35240-47cfb0e5-14c5-4be2-b08c-b6746bd64d12"
+        },
+        {
+          "name": "List customers",
+          "id": "79bd15e6-4c18-44c6-91bc-3c5cb0925463",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "14651e6c-1539-45ae-b1de-4911458612ca",
+              "name": "A paginated list of customers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"id_a\": false\n    },\n    {\n      \"consequat__\": false\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:27.000Z",
+              "updatedAt": "2026-07-28T01:27:27.000Z",
+              "uid": "35240-14651e6c-1539-45ae-b1de-4911458612ca"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:27.000Z",
+          "updatedAt": "2026-07-28T01:27:27.000Z",
+          "uid": "35240-79bd15e6-4c18-44c6-91bc-3c5cb0925463"
+        }
+      ],
+      "id": "5bc90bfb-8e35-4992-a388-934c13f5782c",
+      "createdAt": "2026-07-28T01:27:27.000Z",
+      "updatedAt": "2026-07-28T01:27:27.000Z",
+      "uid": "35240-5bc90bfb-8e35-4992-a388-934c13f5782c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

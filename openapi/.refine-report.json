@@ -1,0 +1,36 @@
+{
+  "provider": "culqi",
+  "sources": [
+    "culqi-3ds-api-openapi.yml",
+    "culqi-cards-api-openapi.yml",
+    "culqi-charges-api-openapi.yml",
+    "culqi-customers-api-openapi.yml",
+    "culqi-events-api-openapi.yml",
+    "culqi-iins-api-openapi.yml",
+    "culqi-orders-api-openapi.yml",
+    "culqi-plans-api-openapi.yml",
+    "culqi-refunds-api-openapi.yml",
+    "culqi-subscriptions-api-openapi.yml",
+    "culqi-tokens-api-openapi.yml",
+    "culqi-transfers-api-openapi.yml"
+  ],
+  "outputs": [
+    "culqi-3ds-api-openapi.yml",
+    "culqi-cards-api-openapi.yml",
+    "culqi-charges-api-openapi.yml",
+    "culqi-customers-api-openapi.yml",
+    "culqi-events-api-openapi.yml",
+    "culqi-iins-api-openapi.yml",
+    "culqi-orders-api-openapi.yml",
+    "culqi-plans-api-openapi.yml",
+    "culqi-refunds-api-openapi.yml",
+    "culqi-subscriptions-api-openapi.yml",
+    "culqi-tokens-api-openapi.yml",
+    "culqi-transfers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

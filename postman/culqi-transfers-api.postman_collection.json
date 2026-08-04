@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "7477a938-52a8-46aa-b783-4ceab7f9c578",
+    "name": "Culqi API v2 3DS Transfers API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:33.000Z",
+    "updatedAt": "2026-07-28T01:27:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7477a938-52a8-46aa-b783-4ceab7f9c578"
+  },
+  "item": [
+    {
+      "name": "transfers",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a settlement transfer",
+              "id": "d953d32f-5fbd-48ac-a067-3d4a66ca3353",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/transfers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "transfers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5e673e61-8d47-42b1-ae0f-9182f3a32562",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d6208842-c359-47a1-8136-78577363d44f",
+                  "name": "Transfer object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transfers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transfers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"status\": \"<string>\",\n  \"creation_date\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T01:27:34.000Z",
+                  "updatedAt": "2026-07-28T01:27:34.000Z",
+                  "uid": "35240-d6208842-c359-47a1-8136-78577363d44f"
+                },
+                {
+                  "id": "3e61a96d-8553-43d2-8fc9-ef6d7aa236ea",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transfers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transfers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:34.000Z",
+                  "updatedAt": "2026-07-28T01:27:34.000Z",
+                  "uid": "35240-3e61a96d-8553-43d2-8fc9-ef6d7aa236ea"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:34.000Z",
+              "updatedAt": "2026-07-28T01:27:34.000Z",
+              "uid": "35240-d953d32f-5fbd-48ac-a067-3d4a66ca3353"
+            }
+          ],
+          "id": "4ae17431-7b08-4867-9b80-68adc9280ff6",
+          "createdAt": "2026-07-28T01:27:34.000Z",
+          "updatedAt": "2026-07-28T01:27:34.000Z",
+          "uid": "35240-4ae17431-7b08-4867-9b80-68adc9280ff6"
+        },
+        {
+          "name": "List settlement transfers",
+          "id": "9588526b-a529-4677-bad8-37361b0b32d8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transfers?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transfers"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Lists settlement transfers (abonos) paid out to the merchant bank account."
+          },
+          "response": [
+            {
+              "id": "bb38c298-596b-4925-a83d-7b5187717798",
+              "name": "A paginated list of transfers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/transfers?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"non70\": 554275.0437583774\n    },\n    {\n      \"proident2\": false,\n      \"Excepteur_f51\": 28693186.235169634\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:34.000Z",
+              "updatedAt": "2026-07-28T01:27:34.000Z",
+              "uid": "35240-bb38c298-596b-4925-a83d-7b5187717798"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:34.000Z",
+          "updatedAt": "2026-07-28T01:27:34.000Z",
+          "uid": "35240-9588526b-a529-4677-bad8-37361b0b32d8"
+        }
+      ],
+      "id": "a6a802bf-0463-4735-9407-c2129eceb56c",
+      "createdAt": "2026-07-28T01:27:34.000Z",
+      "updatedAt": "2026-07-28T01:27:34.000Z",
+      "uid": "35240-a6a802bf-0463-4735-9407-c2129eceb56c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

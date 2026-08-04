@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "f36bcd11-e2b8-4b1a-be34-31ae90a847f5",
+    "name": "Culqi API v2 3DS Iins API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:28.000Z",
+    "updatedAt": "2026-07-28T01:27:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f36bcd11-e2b8-4b1a-be34-31ae90a847f5"
+  },
+  "item": [
+    {
+      "name": "iins",
+      "item": [
+        {
+          "name": "{iin}",
+          "item": [
+            {
+              "name": "Look up card IIN metadata",
+              "id": "31ae9e25-16d9-4d42-a4b2-99360faa7037",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/iins/:iin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "iins",
+                    ":iin"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f20b6ce6-c3b2-4f8d-9c31-6d23980edbfa",
+                      "key": "iin",
+                      "value": "<string>",
+                      "description": "(Required) The card IIN/BIN (first 6 or 8 digits)."
+                    }
+                  ]
+                },
+                "description": "Returns brand, card type, issuer and country information for a card IIN/BIN."
+              },
+              "response": [
+                {
+                  "id": "45d015a4-bbee-41b9-b139-c95ddd3f0706",
+                  "name": "IIN metadata",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/iins/:iin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "iins",
+                        ":iin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "iin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"bin\": \"<string>\",\n  \"card_brand\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"card_category\": \"<string>\",\n  \"issuer\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\"\n  },\n  \"installments_allowed\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-45d015a4-bbee-41b9-b139-c95ddd3f0706"
+                },
+                {
+                  "id": "8d33e369-3b2b-4727-9853-79d02c9d0e29",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/iins/:iin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "iins",
+                        ":iin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "iin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-8d33e369-3b2b-4727-9853-79d02c9d0e29"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-31ae9e25-16d9-4d42-a4b2-99360faa7037"
+            }
+          ],
+          "id": "fa62e854-1c3e-42d7-b7f0-2e4ecab194b3",
+          "createdAt": "2026-07-28T01:27:29.000Z",
+          "updatedAt": "2026-07-28T01:27:29.000Z",
+          "uid": "35240-fa62e854-1c3e-42d7-b7f0-2e4ecab194b3"
+        }
+      ],
+      "id": "2a50a5e9-e6ac-47d3-9e1a-ab345bcc30ab",
+      "createdAt": "2026-07-28T01:27:29.000Z",
+      "updatedAt": "2026-07-28T01:27:29.000Z",
+      "uid": "35240-2a50a5e9-e6ac-47d3-9e1a-ab345bcc30ab"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

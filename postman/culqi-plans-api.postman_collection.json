@@ -1,0 +1,688 @@
+{
+  "info": {
+    "_postman_id": "a5e38f7a-3401-48c7-bf82-cfa5b4973daa",
+    "name": "Culqi API v2 3DS Plans API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:30.000Z",
+    "updatedAt": "2026-07-28T01:27:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a5e38f7a-3401-48c7-bf82-cfa5b4973daa"
+  },
+  "item": [
+    {
+      "name": "plans",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a plan",
+              "id": "5a5f195e-7583-4dd0-a359-42375b0c3e9a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/plans/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d201649e-7b13-4d66-981e-3974447b7b37",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c64f5465-9e79-468f-b88e-97bf65611783",
+                  "name": "Plan object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plans/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plans",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"quisd\": \"<string>\",\n    \"Utff9\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-c64f5465-9e79-468f-b88e-97bf65611783"
+                },
+                {
+                  "id": "1337a4bb-3a64-4f7a-95e2-20cfa7f0e747",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plans/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plans",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-1337a4bb-3a64-4f7a-95e2-20cfa7f0e747"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:30.000Z",
+              "updatedAt": "2026-07-28T01:27:30.000Z",
+              "uid": "35240-5a5f195e-7583-4dd0-a359-42375b0c3e9a"
+            },
+            {
+              "name": "Update a plan",
+              "id": "c0486261-39c5-474f-b159-dfec4815487a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"euf8b\": \"<string>\",\n    \"exercitationb\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plans/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e34c2d9e-3474-4c6b-801d-86059b57efbf",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "229dc0f9-43ca-4d48-9f07-ca38681936e0",
+                  "name": "Updated plan",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"euf8b\": \"<string>\",\n    \"exercitationb\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/plans/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plans",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"quisd\": \"<string>\",\n    \"Utff9\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-229dc0f9-43ca-4d48-9f07-ca38681936e0"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:30.000Z",
+              "updatedAt": "2026-07-28T01:27:30.000Z",
+              "uid": "35240-c0486261-39c5-474f-b159-dfec4815487a"
+            },
+            {
+              "name": "Delete a plan",
+              "id": "a9e38385-58bb-4bcb-8be6-55965ead35c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/plans/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "53680f6f-eaa9-44db-94b8-ee7fdfcac135",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3f7c2b5e-fcdc-4b11-b91d-e355a0161cec",
+                  "name": "Deletion result",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plans/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plans",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"deleted\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"merchant_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-3f7c2b5e-fcdc-4b11-b91d-e355a0161cec"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:30.000Z",
+              "updatedAt": "2026-07-28T01:27:30.000Z",
+              "uid": "35240-a9e38385-58bb-4bcb-8be6-55965ead35c1"
+            }
+          ],
+          "id": "de0abec8-b723-4638-8411-11f01d2decfa",
+          "createdAt": "2026-07-28T01:27:30.000Z",
+          "updatedAt": "2026-07-28T01:27:30.000Z",
+          "uid": "35240-de0abec8-b723-4638-8411-11f01d2decfa"
+        },
+        {
+          "name": "Create a plan",
+          "id": "506d4ca7-18a6-4c2b-a0f5-42d4d0baecd5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"metadata\": {\n    \"irure_dc\": \"<string>\",\n    \"minim_\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/plans",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "plans"
+              ]
+            },
+            "description": "Defines a recurring-billing plan (interval, amount, currency, limit)."
+          },
+          "response": [
+            {
+              "id": "f4a201ef-0235-4f84-b9f8-87553555b546",
+              "name": "Plan created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"metadata\": {\n    \"irure_dc\": \"<string>\",\n    \"minim_\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"quisd\": \"<string>\",\n    \"Utff9\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-f4a201ef-0235-4f84-b9f8-87553555b546"
+            },
+            {
+              "id": "ad273498-ba94-4745-9c37-aebfbedef714",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"interval_unit_time\": \"<integer>\",\n  \"interval_count\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"metadata\": {\n    \"irure_dc\": \"<string>\",\n    \"minim_\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-ad273498-ba94-4745-9c37-aebfbedef714"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:30.000Z",
+          "updatedAt": "2026-07-28T01:27:30.000Z",
+          "uid": "35240-506d4ca7-18a6-4c2b-a0f5-42d4d0baecd5"
+        },
+        {
+          "name": "List plans",
+          "id": "3d3a469b-0f8e-490d-8030-c78adc325111",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/plans?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "plans"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "243649f8-8081-474f-9b14-3c0f5525d99c",
+              "name": "A paginated list of plans",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/plans?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plans"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"cillum56\": 21633242,\n      \"aliqua8\": \"culpa labore Duis\"\n    },\n    {\n      \"laborumfa\": 71705756,\n      \"labore_f75\": true,\n      \"tempor_b\": -60922105.585630916\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-243649f8-8081-474f-9b14-3c0f5525d99c"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:30.000Z",
+          "updatedAt": "2026-07-28T01:27:30.000Z",
+          "uid": "35240-3d3a469b-0f8e-490d-8030-c78adc325111"
+        }
+      ],
+      "id": "fa34cd52-3065-4f6e-9a20-9ff6fb0de205",
+      "createdAt": "2026-07-28T01:27:30.000Z",
+      "updatedAt": "2026-07-28T01:27:30.000Z",
+      "uid": "35240-fa34cd52-3065-4f6e-9a20-9ff6fb0de205"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

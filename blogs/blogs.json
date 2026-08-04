@@ -1,0 +1,21 @@
+{
+  "repo": "culqi",
+  "feeds": [
+    {
+      "source": "https://medium.com/feed/team-culqi",
+      "feed_url": "https://medium.com/feed/team-culqi",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://medium.com/team-culqi",
+      "feed_url": "https://medium.com/feed/team-culqi",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 2,
+  "fetched": "2026-08-01T15:49:00Z"
+}

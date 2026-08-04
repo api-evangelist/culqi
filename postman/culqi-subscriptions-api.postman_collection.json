@@ -1,0 +1,688 @@
+{
+  "info": {
+    "_postman_id": "3d2d9d4e-a982-4501-9c43-2fcbdfab2255",
+    "name": "Culqi API v2 3DS Subscriptions API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:32.000Z",
+    "updatedAt": "2026-07-28T01:27:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d2d9d4e-a982-4501-9c43-2fcbdfab2255"
+  },
+  "item": [
+    {
+      "name": "subscriptions",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a subscription",
+              "id": "212b34f6-c66d-41f1-a5bc-37a51dab2606",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "866ee953-d821-4519-b45a-69d8f77523eb",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "cfb35746-8bbb-4281-b50f-66dc957bdbd0",
+                  "name": "Subscription object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"plan_id\": \"<string>\",\n  \"card_id\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"next_billing_date\": \"<integer>\",\n  \"metadata\": {\n    \"est_9b4\": \"<string>\",\n    \"Utd_\": \"<string>\",\n    \"pariatur___9\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:32.000Z",
+                  "updatedAt": "2026-07-28T01:27:32.000Z",
+                  "uid": "35240-cfb35746-8bbb-4281-b50f-66dc957bdbd0"
+                },
+                {
+                  "id": "8e2d1eb5-9392-4163-ad25-a10afde79848",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:32.000Z",
+                  "updatedAt": "2026-07-28T01:27:32.000Z",
+                  "uid": "35240-8e2d1eb5-9392-4163-ad25-a10afde79848"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-212b34f6-c66d-41f1-a5bc-37a51dab2606"
+            },
+            {
+              "name": "Update a subscription",
+              "id": "4221b8a2-8d8e-4649-b2ae-ff9cc11217de",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"ex6\": \"<string>\",\n    \"quis4\": \"<string>\",\n    \"officia04\": \"<string>\",\n    \"pariatur_576\": \"<string>\",\n    \"deserunt_56\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5a6bde39-a058-4c4b-a548-f42f48e2b6f6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8b41fd88-cd4f-4899-976d-d571b52f07c3",
+                  "name": "Updated subscription",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"ex6\": \"<string>\",\n    \"quis4\": \"<string>\",\n    \"officia04\": \"<string>\",\n    \"pariatur_576\": \"<string>\",\n    \"deserunt_56\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"plan_id\": \"<string>\",\n  \"card_id\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"next_billing_date\": \"<integer>\",\n  \"metadata\": {\n    \"est_9b4\": \"<string>\",\n    \"Utd_\": \"<string>\",\n    \"pariatur___9\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:32.000Z",
+                  "updatedAt": "2026-07-28T01:27:32.000Z",
+                  "uid": "35240-8b41fd88-cd4f-4899-976d-d571b52f07c3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-4221b8a2-8d8e-4649-b2ae-ff9cc11217de"
+            },
+            {
+              "name": "Cancel a subscription",
+              "id": "42eb025a-8ca2-418a-9d35-7b23833ddb5b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "29bf9c96-0c18-415a-abec-2566fbc29be2",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7c1aa5f5-ecf4-4691-8039-1bb9aa9619b1",
+                  "name": "Cancellation result",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"deleted\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"merchant_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:32.000Z",
+                  "updatedAt": "2026-07-28T01:27:32.000Z",
+                  "uid": "35240-7c1aa5f5-ecf4-4691-8039-1bb9aa9619b1"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-42eb025a-8ca2-418a-9d35-7b23833ddb5b"
+            }
+          ],
+          "id": "168bbb54-27ea-4778-b86c-c49d180b0847",
+          "createdAt": "2026-07-28T01:27:32.000Z",
+          "updatedAt": "2026-07-28T01:27:32.000Z",
+          "uid": "35240-168bbb54-27ea-4778-b86c-c49d180b0847"
+        },
+        {
+          "name": "Create a subscription",
+          "id": "c7c73b4f-6fd4-4dd9-af0d-3b134bcf71f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"tyc\": \"<boolean>\",\n  \"metadata\": {\n    \"in_98\": \"<string>\",\n    \"ut8\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "Subscribes a saved card to a plan for recurring charges."
+          },
+          "response": [
+            {
+              "id": "6f8baa71-51d4-4319-bb0f-fcf5fd189eb5",
+              "name": "Subscription created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"tyc\": \"<boolean>\",\n  \"metadata\": {\n    \"in_98\": \"<string>\",\n    \"ut8\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"plan_id\": \"<string>\",\n  \"card_id\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"next_billing_date\": \"<integer>\",\n  \"metadata\": {\n    \"est_9b4\": \"<string>\",\n    \"Utd_\": \"<string>\",\n    \"pariatur___9\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-6f8baa71-51d4-4319-bb0f-fcf5fd189eb5"
+            },
+            {
+              "id": "e36d0238-8f3f-4157-9219-6d40c9e3acb7",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"tyc\": \"<boolean>\",\n  \"metadata\": {\n    \"in_98\": \"<string>\",\n    \"ut8\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-e36d0238-8f3f-4157-9219-6d40c9e3acb7"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:32.000Z",
+          "updatedAt": "2026-07-28T01:27:32.000Z",
+          "uid": "35240-c7c73b4f-6fd4-4dd9-af0d-3b134bcf71f6"
+        },
+        {
+          "name": "List subscriptions",
+          "id": "d7f49477-ff9b-438f-846f-d2a4aa9a5cc3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "111d0096-3bf1-429a-902f-c570fe86d8d5",
+              "name": "A paginated list of subscriptions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"in_bc9\": -86458815\n    },\n    {\n      \"voluptate_\": -76982919,\n      \"laborumbe3\": -46421941.327914596,\n      \"Ut4\": true\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:32.000Z",
+              "updatedAt": "2026-07-28T01:27:32.000Z",
+              "uid": "35240-111d0096-3bf1-429a-902f-c570fe86d8d5"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:32.000Z",
+          "updatedAt": "2026-07-28T01:27:32.000Z",
+          "uid": "35240-d7f49477-ff9b-438f-846f-d2a4aa9a5cc3"
+        }
+      ],
+      "id": "844a4150-b95d-4576-b3eb-9517a49359eb",
+      "createdAt": "2026-07-28T01:27:32.000Z",
+      "updatedAt": "2026-07-28T01:27:32.000Z",
+      "uid": "35240-844a4150-b95d-4576-b3eb-9517a49359eb"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

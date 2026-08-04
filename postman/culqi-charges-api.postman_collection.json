@@ -1,0 +1,756 @@
+{
+  "info": {
+    "_postman_id": "86b0fc65-fb55-4ccd-a228-53bf6d8afbf0",
+    "name": "Culqi API v2 3DS Charges API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:25.000Z",
+    "updatedAt": "2026-07-28T01:27:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-86b0fc65-fb55-4ccd-a228-53bf6d8afbf0"
+  },
+  "item": [
+    {
+      "name": "charges",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "capture",
+              "item": [
+                {
+                  "name": "Capture a pre-authorized charge",
+                  "id": "3f15c72c-2420-414b-a474-a3e3646cfa2a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/charges/:id/capture",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "charges",
+                        ":id",
+                        "capture"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5dac9c98-3f08-42b8-95d8-520e7dddf5fa",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique resource identifier."
+                        }
+                      ]
+                    },
+                    "description": "Captures a charge that was created with capture=false (authorization hold)."
+                  },
+                  "response": [
+                    {
+                      "id": "94922c78-84c4-4d14-b1fb-69ac4c4e4a16",
+                      "name": "Captured charge",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/charges/:id/capture",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "charges",
+                            ":id",
+                            "capture"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"amount_refunded\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"source\": {\n    \"uta\": -3951208,\n    \"velit110\": \"Lorem ea irure est exercitation\"\n  },\n  \"outcome\": {\n    \"do_d0\": \"dolor aliqua esse est\",\n    \"consecteturb7\": 97095480,\n    \"nostrud1\": true\n  },\n  \"capture\": \"<boolean>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"esse_b0\": \"<string>\",\n    \"nostrudff6\": \"<string>\",\n    \"non_409\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:27:26.000Z",
+                      "updatedAt": "2026-07-28T01:27:26.000Z",
+                      "uid": "35240-94922c78-84c4-4d14-b1fb-69ac4c4e4a16"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:27:26.000Z",
+                  "updatedAt": "2026-07-28T01:27:26.000Z",
+                  "uid": "35240-3f15c72c-2420-414b-a474-a3e3646cfa2a"
+                }
+              ],
+              "id": "5f0db0cd-53c1-46a0-8c54-035a5ca76c81",
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-5f0db0cd-53c1-46a0-8c54-035a5ca76c81"
+            },
+            {
+              "name": "Retrieve a charge",
+              "id": "3f8f36e4-d1c1-47cd-9de6-94899cf81d3b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/charges/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5dacf4bb-75b9-48f5-8db6-c38181d51b7f",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "94eac80e-71a9-4c4c-9b9d-95cbbe31c362",
+                  "name": "Charge object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/charges/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "charges",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"amount_refunded\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"source\": {\n    \"uta\": -3951208,\n    \"velit110\": \"Lorem ea irure est exercitation\"\n  },\n  \"outcome\": {\n    \"do_d0\": \"dolor aliqua esse est\",\n    \"consecteturb7\": 97095480,\n    \"nostrud1\": true\n  },\n  \"capture\": \"<boolean>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"esse_b0\": \"<string>\",\n    \"nostrudff6\": \"<string>\",\n    \"non_409\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:26.000Z",
+                  "updatedAt": "2026-07-28T01:27:26.000Z",
+                  "uid": "35240-94eac80e-71a9-4c4c-9b9d-95cbbe31c362"
+                },
+                {
+                  "id": "a62bd4ae-dd1b-40c7-b641-bbcb8bc4f41e",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/charges/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "charges",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:26.000Z",
+                  "updatedAt": "2026-07-28T01:27:26.000Z",
+                  "uid": "35240-a62bd4ae-dd1b-40c7-b641-bbcb8bc4f41e"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-3f8f36e4-d1c1-47cd-9de6-94899cf81d3b"
+            },
+            {
+              "name": "Update charge metadata",
+              "id": "8cb2a6f0-70ca-454c-9ef7-89189c58a5ce",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"sint0\": \"<string>\",\n    \"nostruda7\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/charges/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "05ed04ae-fb8b-43a1-b016-01224cb1f275",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b66c63c0-dd94-4dc3-abb6-a23190aca8eb",
+                  "name": "Updated charge",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"sint0\": \"<string>\",\n    \"nostruda7\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/charges/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "charges",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"amount_refunded\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"source\": {\n    \"uta\": -3951208,\n    \"velit110\": \"Lorem ea irure est exercitation\"\n  },\n  \"outcome\": {\n    \"do_d0\": \"dolor aliqua esse est\",\n    \"consecteturb7\": 97095480,\n    \"nostrud1\": true\n  },\n  \"capture\": \"<boolean>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"esse_b0\": \"<string>\",\n    \"nostrudff6\": \"<string>\",\n    \"non_409\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:26.000Z",
+                  "updatedAt": "2026-07-28T01:27:26.000Z",
+                  "uid": "35240-b66c63c0-dd94-4dc3-abb6-a23190aca8eb"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-8cb2a6f0-70ca-454c-9ef7-89189c58a5ce"
+            }
+          ],
+          "id": "316e5bc8-a5e7-411e-8fbd-b9382338a612",
+          "createdAt": "2026-07-28T01:27:26.000Z",
+          "updatedAt": "2026-07-28T01:27:26.000Z",
+          "uid": "35240-316e5bc8-a5e7-411e-8fbd-b9382338a612"
+        },
+        {
+          "name": "Create a charge",
+          "id": "525caff2-4470-40fb-9a88-d57dc143ad39",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"email\": \"<email>\",\n  \"source_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"capture\": true,\n  \"installments\": \"<integer>\",\n  \"antifraud_details\": {\n    \"Duis_25\": \"consectetur\",\n    \"aute_7\": true\n  },\n  \"metadata\": {\n    \"cillum__2f\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/charges",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "charges"
+              ]
+            },
+            "description": "Creates a one-time charge (cargo) against a token, saved card or Yape token. amount is an integer in the currency minor unit (cents), currency_code is PEN or USD."
+          },
+          "response": [
+            {
+              "id": "b1acdd7a-243f-456c-b704-f923196d0955",
+              "name": "Charge created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"email\": \"<email>\",\n  \"source_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"capture\": true,\n  \"installments\": \"<integer>\",\n  \"antifraud_details\": {\n    \"Duis_25\": \"consectetur\",\n    \"aute_7\": true\n  },\n  \"metadata\": {\n    \"cillum__2f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/charges",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"amount_refunded\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"source\": {\n    \"uta\": -3951208,\n    \"velit110\": \"Lorem ea irure est exercitation\"\n  },\n  \"outcome\": {\n    \"do_d0\": \"dolor aliqua esse est\",\n    \"consecteturb7\": 97095480,\n    \"nostrud1\": true\n  },\n  \"capture\": \"<boolean>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"esse_b0\": \"<string>\",\n    \"nostrudff6\": \"<string>\",\n    \"non_409\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-b1acdd7a-243f-456c-b704-f923196d0955"
+            },
+            {
+              "id": "0d3708f0-821b-4f70-9901-3ef3fd48fdb8",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"email\": \"<email>\",\n  \"source_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"capture\": true,\n  \"installments\": \"<integer>\",\n  \"antifraud_details\": {\n    \"Duis_25\": \"consectetur\",\n    \"aute_7\": true\n  },\n  \"metadata\": {\n    \"cillum__2f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/charges",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-0d3708f0-821b-4f70-9901-3ef3fd48fdb8"
+            },
+            {
+              "id": "b6f62e07-1ffb-48c0-af75-fe0bec781fcb",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"email\": \"<email>\",\n  \"source_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"capture\": true,\n  \"installments\": \"<integer>\",\n  \"antifraud_details\": {\n    \"Duis_25\": \"consectetur\",\n    \"aute_7\": true\n  },\n  \"metadata\": {\n    \"cillum__2f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/charges",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges"
+                  ]
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-b6f62e07-1ffb-48c0-af75-fe0bec781fcb"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:26.000Z",
+          "updatedAt": "2026-07-28T01:27:26.000Z",
+          "uid": "35240-525caff2-4470-40fb-9a88-d57dc143ad39"
+        },
+        {
+          "name": "List charges",
+          "id": "90a30463-4dba-49c7-a84d-bfca0fee235d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/charges?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "charges"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2811625-f6a6-4bce-8fa3-b8815023633e",
+              "name": "A paginated list of charges",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/charges?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "charges"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"eaef\": \"consequat esse in\",\n      \"culpa__a\": -77401327.02128921,\n      \"dolora\": true,\n      \"cupidatat_240\": -3477124\n    },\n    {\n      \"deserunt073\": -7515013,\n      \"commodo_88\": 52615442.7231293\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:26.000Z",
+              "updatedAt": "2026-07-28T01:27:26.000Z",
+              "uid": "35240-b2811625-f6a6-4bce-8fa3-b8815023633e"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:26.000Z",
+          "updatedAt": "2026-07-28T01:27:26.000Z",
+          "uid": "35240-90a30463-4dba-49c7-a84d-bfca0fee235d"
+        }
+      ],
+      "id": "e91330a7-9c10-4be1-af9c-30895c1b378f",
+      "createdAt": "2026-07-28T01:27:26.000Z",
+      "updatedAt": "2026-07-28T01:27:26.000Z",
+      "uid": "35240-e91330a7-9c10-4be1-af9c-30895c1b378f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

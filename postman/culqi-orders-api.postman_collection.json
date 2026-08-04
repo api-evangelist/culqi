@@ -1,0 +1,810 @@
+{
+  "info": {
+    "_postman_id": "79ad7f36-4d79-489f-95f9-378f96c32ebf",
+    "name": "Culqi API v2 3DS Orders API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:29.000Z",
+    "updatedAt": "2026-07-28T01:27:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-79ad7f36-4d79-489f-95f9-378f96c32ebf"
+  },
+  "item": [
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve an order",
+              "id": "6c874f23-1ce5-4faa-a087-132984856ea7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "68136b99-49ff-4e07-8162-f8b5a4bc2bb9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "cec0a0aa-076d-4bc1-a4f7-9f9591497dd2",
+                  "name": "Order object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"state\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"cip_code\": \"<string>\",\n  \"expiration_date\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"pariatur_237\": \"<string>\",\n    \"officia_\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-cec0a0aa-076d-4bc1-a4f7-9f9591497dd2"
+                },
+                {
+                  "id": "e59beb1c-01b4-4e85-b9a5-3903c7ccf1f9",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-e59beb1c-01b4-4e85-b9a5-3903c7ccf1f9"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-6c874f23-1ce5-4faa-a087-132984856ea7"
+            },
+            {
+              "name": "Update order metadata",
+              "id": "506751bf-9a67-4c3e-be6b-7b81c61b7d8d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"deserunt_8f\": \"<string>\",\n    \"magna5\": \"<string>\",\n    \"anim_fc\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0c77495b-f6b7-4a65-ae10-9a11063bd0e8",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8fcae28a-bc94-4483-b64f-be293e53b93f",
+                  "name": "Updated order",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"deserunt_8f\": \"<string>\",\n    \"magna5\": \"<string>\",\n    \"anim_fc\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"state\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"cip_code\": \"<string>\",\n  \"expiration_date\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"pariatur_237\": \"<string>\",\n    \"officia_\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-8fcae28a-bc94-4483-b64f-be293e53b93f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-506751bf-9a67-4c3e-be6b-7b81c61b7d8d"
+            },
+            {
+              "name": "Delete an order",
+              "id": "bc886e42-6655-4250-8632-b53ff8c1f01f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "af997f95-1ccb-4450-9456-72d5e867ae44",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "387c61d7-9b55-4564-9bd9-da2fec5ee301",
+                  "name": "Deletion result",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"deleted\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"merchant_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-387c61d7-9b55-4564-9bd9-da2fec5ee301"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-bc886e42-6655-4250-8632-b53ff8c1f01f"
+            }
+          ],
+          "id": "6a714e62-7478-4b97-90b0-3e1ffdfbaef8",
+          "createdAt": "2026-07-28T01:27:29.000Z",
+          "updatedAt": "2026-07-28T01:27:29.000Z",
+          "uid": "35240-6a714e62-7478-4b97-90b0-3e1ffdfbaef8"
+        },
+        {
+          "name": "confirm",
+          "item": [
+            {
+              "name": "Confirm an order",
+              "id": "88f61591-a638-48f8-8ed5-b2dd3fdbbe9f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/confirm",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "confirm"
+                  ]
+                },
+                "description": "Confirms an order, generating the payment instrument (e.g. PagoEfectivo CIP) for the customer."
+              },
+              "response": [
+                {
+                  "id": "00a3dea2-f0bf-4cec-b2ab-6557e8f81a53",
+                  "name": "Confirmed order",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/confirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "confirm"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"state\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"cip_code\": \"<string>\",\n  \"expiration_date\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"pariatur_237\": \"<string>\",\n    \"officia_\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:29.000Z",
+                  "updatedAt": "2026-07-28T01:27:29.000Z",
+                  "uid": "35240-00a3dea2-f0bf-4cec-b2ab-6557e8f81a53"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-88f61591-a638-48f8-8ed5-b2dd3fdbbe9f"
+            }
+          ],
+          "id": "17d59049-4743-43cc-9d91-52d1d778806d",
+          "createdAt": "2026-07-28T01:27:29.000Z",
+          "updatedAt": "2026-07-28T01:27:29.000Z",
+          "uid": "35240-17d59049-4743-43cc-9d91-52d1d778806d"
+        },
+        {
+          "name": "Create an order",
+          "id": "3013cf1b-0283-4f69-b86a-38c4d03b800d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"description\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"client_details\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"expiration_date\": \"<integer>\",\n  \"payment_methods\": {\n    \"deserunt_6a\": \"laborum sed elit aute cillum\"\n  },\n  \"metadata\": {\n    \"qui_d7\": \"<string>\",\n    \"do_ef3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Creates a payment order used by asynchronous methods such as PagoEfectivo (generates a CIP code) and bank transfers. amount is an integer in the currency minor unit."
+          },
+          "response": [
+            {
+              "id": "34350c1d-6f85-4a53-8133-e3d9c3dc0f7a",
+              "name": "Order created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"description\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"client_details\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"expiration_date\": \"<integer>\",\n  \"payment_methods\": {\n    \"deserunt_6a\": \"laborum sed elit aute cillum\"\n  },\n  \"metadata\": {\n    \"qui_d7\": \"<string>\",\n    \"do_ef3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"USD\",\n  \"state\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"cip_code\": \"<string>\",\n  \"expiration_date\": \"<integer>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"pariatur_237\": \"<string>\",\n    \"officia_\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-34350c1d-6f85-4a53-8133-e3d9c3dc0f7a"
+            },
+            {
+              "id": "4cd3ccf3-74ec-46ce-9608-803ba594ebaf",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency_code\": \"PEN\",\n  \"description\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"client_details\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"expiration_date\": \"<integer>\",\n  \"payment_methods\": {\n    \"deserunt_6a\": \"laborum sed elit aute cillum\"\n  },\n  \"metadata\": {\n    \"qui_d7\": \"<string>\",\n    \"do_ef3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-4cd3ccf3-74ec-46ce-9608-803ba594ebaf"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:29.000Z",
+          "updatedAt": "2026-07-28T01:27:29.000Z",
+          "uid": "35240-3013cf1b-0283-4f69-b86a-38c4d03b800d"
+        },
+        {
+          "name": "List orders",
+          "id": "c47955a1-c6b8-4d9e-b489-ebe2ec620af3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "70e50c72-3ec2-4c1c-b5e2-cb270bc6ae8e",
+              "name": "A paginated list of orders",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"commodo_5b3\": 89160232.68406063\n    },\n    {\n      \"voluptatea\": true,\n      \"enim_62\": \"quis commodo dolore\"\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:29.000Z",
+              "updatedAt": "2026-07-28T01:27:29.000Z",
+              "uid": "35240-70e50c72-3ec2-4c1c-b5e2-cb270bc6ae8e"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:29.000Z",
+          "updatedAt": "2026-07-28T01:27:29.000Z",
+          "uid": "35240-c47955a1-c6b8-4d9e-b489-ebe2ec620af3"
+        }
+      ],
+      "id": "1efc9601-6a03-4cbc-b3bb-3de8d66626c4",
+      "createdAt": "2026-07-28T01:27:29.000Z",
+      "updatedAt": "2026-07-28T01:27:29.000Z",
+      "uid": "35240-1efc9601-6a03-4cbc-b3bb-3de8d66626c4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}

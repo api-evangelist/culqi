@@ -1,0 +1,591 @@
+{
+  "info": {
+    "_postman_id": "e2fe419e-7790-4d15-ba71-d9388f85d97c",
+    "name": "Culqi API v2 3DS Refunds API",
+    "description": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:27:31.000Z",
+    "updatedAt": "2026-07-28T01:27:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e2fe419e-7790-4d15-ba71-d9388f85d97c"
+  },
+  "item": [
+    {
+      "name": "refunds",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a refund",
+              "id": "a56448b3-cf70-4611-b0d3-d63560fcdd2f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e28bfae9-3d7e-4240-aa8e-6664ba089e86",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3e3455dd-b8f3-4e93-af0c-65f273e4ca3e",
+                  "name": "Refund object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"laborisf\": \"<string>\",\n    \"ea_cb\": \"<string>\",\n    \"dolor16\": \"<string>\",\n    \"laboris_93\": \"<string>\",\n    \"esse19e\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-3e3455dd-b8f3-4e93-af0c-65f273e4ca3e"
+                },
+                {
+                  "id": "94e27803-aa0a-4887-9222-c22a7afde97f",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-94e27803-aa0a-4887-9222-c22a7afde97f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-a56448b3-cf70-4611-b0d3-d63560fcdd2f"
+            },
+            {
+              "name": "Update refund metadata",
+              "id": "aee0b7ab-d4b2-439a-8c02-2f0f5b05a637",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"veniam_98\": \"<string>\",\n    \"ea5\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5bd28090-93ed-472f-94a4-23a782f37c67",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "136a2b3a-1cce-4157-9f7c-d8338e9a0484",
+                  "name": "Updated refund",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"veniam_98\": \"<string>\",\n    \"ea5\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"laborisf\": \"<string>\",\n    \"ea_cb\": \"<string>\",\n    \"dolor16\": \"<string>\",\n    \"laboris_93\": \"<string>\",\n    \"esse19e\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:27:31.000Z",
+                  "updatedAt": "2026-07-28T01:27:31.000Z",
+                  "uid": "35240-136a2b3a-1cce-4157-9f7c-d8338e9a0484"
+                }
+              ],
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-aee0b7ab-d4b2-439a-8c02-2f0f5b05a637"
+            }
+          ],
+          "id": "a9449ae4-17d8-45d6-8568-d0aa6704f957",
+          "createdAt": "2026-07-28T01:27:31.000Z",
+          "updatedAt": "2026-07-28T01:27:31.000Z",
+          "uid": "35240-a9449ae4-17d8-45d6-8568-d0aa6704f957"
+        },
+        {
+          "name": "Create a refund",
+          "id": "c90acc4c-f93d-4bb4-8cbe-70c540731bb6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"duplicado\",\n  \"metadata\": {\n    \"commodo_8\": \"<string>\",\n    \"quis_0fc\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/refunds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ]
+            },
+            "description": "Refunds all or part of a charge. amount is an integer in the currency minor unit."
+          },
+          "response": [
+            {
+              "id": "85ac94c0-bb97-4706-8ff6-79bbe446b129",
+              "name": "Refund created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"duplicado\",\n  \"metadata\": {\n    \"commodo_8\": \"<string>\",\n    \"quis_0fc\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"creation_date\": \"<integer>\",\n  \"metadata\": {\n    \"laborisf\": \"<string>\",\n    \"ea_cb\": \"<string>\",\n    \"dolor16\": \"<string>\",\n    \"laboris_93\": \"<string>\",\n    \"esse19e\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-85ac94c0-bb97-4706-8ff6-79bbe446b129"
+            },
+            {
+              "id": "bee1d679-ae77-4e21-b14e-a07004f2d352",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"charge_id\": \"<string>\",\n  \"reason\": \"duplicado\",\n  \"metadata\": {\n    \"commodo_8\": \"<string>\",\n    \"quis_0fc\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"type\": \"<string>\",\n  \"merchant_message\": \"<string>\",\n  \"user_message\": \"<string>\",\n  \"param\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-bee1d679-ae77-4e21-b14e-a07004f2d352"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:31.000Z",
+          "updatedAt": "2026-07-28T01:27:31.000Z",
+          "uid": "35240-c90acc4c-f93d-4bb4-8cbe-70c540731bb6"
+        },
+        {
+          "name": "List refunds",
+          "id": "0464d37c-3ccf-4741-9d9b-417b51f4daa2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/refunds?limit=10&before=<string>&after=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (max 100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Cursor - return records created before this id.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor - return records created after this id.",
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "681634a0-af17-4359-b122-bb13117ed50b",
+              "name": "A paginated list of refunds",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds?limit=10&before=<string>&after=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (max 100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor - return records created before this id.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor - return records created after this id.",
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"incididunt__38\": -23227958.501644075,\n      \"dolore_3\": -53336433\n    },\n    {\n      \"ex_\": \"est\",\n      \"ut4e2\": false\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\",\n    \"cursors\": {\n      \"before\": \"<string>\",\n      \"after\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:27:31.000Z",
+              "updatedAt": "2026-07-28T01:27:31.000Z",
+              "uid": "35240-681634a0-af17-4359-b122-bb13117ed50b"
+            }
+          ],
+          "createdAt": "2026-07-28T01:27:31.000Z",
+          "updatedAt": "2026-07-28T01:27:31.000Z",
+          "uid": "35240-0464d37c-3ccf-4741-9d9b-417b51f4daa2"
+        }
+      ],
+      "id": "e50c3970-1d01-49c0-86fe-af4c495a7703",
+      "createdAt": "2026-07-28T01:27:31.000Z",
+      "updatedAt": "2026-07-28T01:27:31.000Z",
+      "uid": "35240-e50c3970-1d01-49c0-86fe-af4c495a7703"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.culqi.com/v2"
+    }
+  ]
+}
