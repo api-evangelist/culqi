@@ -1,0 +1,807 @@
+{
+  "item": [
+    {
+      "id": "c3882877-8744-433a-abd3-f767d95d10e9",
+      "name": "Tokens",
+      "description": {
+        "content": "Client-side tokenization of card and Yape credentials on the secure host.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3567d4a6-c83d-4210-a217-4d54b5eb3d45",
+          "name": "Create a card token",
+          "request": {
+            "name": "Create a card token",
+            "description": {
+              "content": "Tokenizes card data on the PCI-scoped secure host using the public key (pk_). The resulting token id (tkn_...) is single-use and is passed as source_id when creating a charge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens"
+              ],
+              "host": [
+                "{{tokens-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_number\": \"<string>\",\n  \"cvv\": \"<string>\",\n  \"expiration_month\": \"<string>\",\n  \"expiration_year\": \"<string>\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ba16426-c1b9-4a88-86c3-13fd4630824e",
+              "name": "Token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{tokens-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"cvv\": \"123\",\n  \"expiration_month\": \"<string>\",\n  \"expiration_year\": \"2028\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"token\",\n  \"id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"type\": \"card\",\n  \"email\": \"string\",\n  \"creation_date\": 1862,\n  \"card_number\": \"411111******1111\",\n  \"last_four\": \"string\",\n  \"active\": true,\n  \"iin\": {\n    \"object\": \"iin\",\n    \"bin\": \"string\",\n    \"card_brand\": \"Visa\",\n    \"card_type\": \"credito\",\n    \"card_category\": \"string\",\n    \"issuer\": {\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"country_code\": \"string\"\n    },\n    \"installments_allowed\": [\n      7066,\n      7425\n    ]\n  },\n  \"client\": {\n    \"key_0\": 1066.403870681081,\n    \"key_1\": 7016\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c52eb085-fcda-402d-8ff6-d4d4a6fc67fa",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{tokens-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"cvv\": \"123\",\n  \"expiration_month\": \"<string>\",\n  \"expiration_year\": \"2028\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b278825d-7b95-4b3b-92f9-51ac949ba24c",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{tokens-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"cvv\": \"123\",\n  \"expiration_month\": \"<string>\",\n  \"expiration_year\": \"2028\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f60f850-9ba7-4789-98ac-7089d7a8ad64",
+          "name": "List tokens",
+          "request": {
+            "name": "List tokens",
+            "description": {},
+            "url": {
+              "path": [
+                "tokens"
+              ],
+              "host": [
+                "{{tokens-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records to return (max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor - return records created before this id."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor - return records created after this id."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e52e703-9576-40e5-a373-170781ac726b",
+              "name": "A paginated list of tokens",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{tokens-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    {\n      \"key_0\": 9277.939261970172,\n      \"key_1\": 6528.247992280109,\n      \"key_2\": 9685.621220148128\n    }\n  ],\n  \"paging\": {\n    \"previous\": \"string\",\n    \"next\": \"string\",\n    \"cursors\": {\n      \"before\": \"string\",\n      \"after\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "757a03f3-3182-4481-907f-ec0b51a7137c",
+          "name": "Create a Yape token",
+          "request": {
+            "name": "Create a Yape token",
+            "description": {
+              "content": "Tokenizes a Yape (BCP mobile wallet) approval code and phone number into a single-use token (ype_...) for use as a charge source_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                "yape"
+              ],
+              "host": [
+                "{{tokens-yape-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"otp\": \"<string>\",\n  \"number_phone\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1b60613-b57d-40fe-8860-3c21f03ce665",
+              "name": "Yape token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "yape"
+                  ],
+                  "host": [
+                    "{{tokens-yape-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"otp\": \"<string>\",\n  \"number_phone\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"token\",\n  \"id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"type\": \"card\",\n  \"email\": \"string\",\n  \"creation_date\": 7840,\n  \"card_number\": \"411111******1111\",\n  \"last_four\": \"string\",\n  \"active\": true,\n  \"iin\": {\n    \"object\": \"iin\",\n    \"bin\": \"string\",\n    \"card_brand\": \"Visa\",\n    \"card_type\": \"credito\",\n    \"card_category\": \"string\",\n    \"issuer\": {\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"country_code\": \"string\"\n    },\n    \"installments_allowed\": [\n      0,\n      5226\n    ]\n  },\n  \"client\": {\n    \"key_0\": false,\n    \"key_1\": 7309.076071567465\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75bbbfb5-ae32-4d4e-83ea-f4d40d2559ec",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "yape"
+                  ],
+                  "host": [
+                    "{{tokens-yape-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"otp\": \"<string>\",\n  \"number_phone\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef49695-5998-4d13-97c5-2319c4e4da06",
+          "name": "Retrieve a token",
+          "request": {
+            "name": "Retrieve a token",
+            "description": {},
+            "url": {
+              "path": [
+                "tokens",
+                ":id"
+              ],
+              "host": [
+                "{{tokens-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0c4733bf-cde0-4b5b-b4f4-edb8ca34641d",
+              "name": "Token object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{tokens-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"token\",\n  \"id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"type\": \"card\",\n  \"email\": \"string\",\n  \"creation_date\": 7840,\n  \"card_number\": \"411111******1111\",\n  \"last_four\": \"string\",\n  \"active\": true,\n  \"iin\": {\n    \"object\": \"iin\",\n    \"bin\": \"string\",\n    \"card_brand\": \"Visa\",\n    \"card_type\": \"credito\",\n    \"card_category\": \"string\",\n    \"issuer\": {\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"country_code\": \"string\"\n    },\n    \"installments_allowed\": [\n      0,\n      5226\n    ]\n  },\n  \"client\": {\n    \"key_0\": false,\n    \"key_1\": 7309.076071567465\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7416137e-1d73-484d-a9ca-4acef6fc97f7",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{tokens-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3ed6f50-5972-48ae-b4f0-6394cb7978d3",
+          "name": "Update token metadata",
+          "request": {
+            "name": "Update token metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "tokens",
+                ":id"
+              ],
+              "host": [
+                "{{tokens-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9c65ab1-bcd8-48e4-a35a-350ee10cf299",
+              "name": "Updated token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{tokens-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"token\",\n  \"id\": \"tkn_test_xxxxxxxxxxxx\",\n  \"type\": \"card\",\n  \"email\": \"string\",\n  \"creation_date\": 7840,\n  \"card_number\": \"411111******1111\",\n  \"last_four\": \"string\",\n  \"active\": true,\n  \"iin\": {\n    \"object\": \"iin\",\n    \"bin\": \"string\",\n    \"card_brand\": \"Visa\",\n    \"card_type\": \"credito\",\n    \"card_category\": \"string\",\n    \"issuer\": {\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"country_code\": \"string\"\n    },\n    \"installments_allowed\": [\n      0,\n      5226\n    ]\n  },\n  \"client\": {\n    \"key_0\": false,\n    \"key_1\": 7309.076071567465\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.culqi.com/v2",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://secure.culqi.com/v2",
+      "key": "tokens-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://secure.culqi.com/v2",
+      "key": "tokens-yape-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://secure.culqi.com/v2",
+      "key": "tokens-id-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "e7a59cc5-4e97-45c5-8aaf-3114fb7dd35b",
+    "name": "Culqi API v2 3DS Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

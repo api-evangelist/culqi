@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Culqi API v2 3DS Iins API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Iins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up card IIN metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.culqi.com/v2/iins/:iin",
+            "params": [
+              {
+                "name": "iin",
+                "value": "",
+                "type": "path",
+                "description": "The card IIN/BIN (first 6 or 8 digits)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns brand, card type, issuer and country information for a card IIN/BIN."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Culqi API v2 3DS Tokens API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.culqi.com/v2/tokens",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 100)."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return records created before this id."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return records created after this id."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List tokens"
+        },
+        {
+          "info": {
+            "name": "Create a card token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.culqi.com/v2/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Tokenizes card data on the PCI-scoped secure host using the public key (pk_). The resulting token id (tkn_...) is single-use and is passed as source_id when creating a charge."
+        },
+        {
+          "info": {
+            "name": "Create a Yape token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.culqi.com/v2/tokens/yape",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Tokenizes a Yape (BCP mobile wallet) approval code and phone number into a single-use token (ype_...) for use as a charge source_id."
+        },
+        {
+          "info": {
+            "name": "Retrieve a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.culqi.com/v2/tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique resource identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a token"
+        },
+        {
+          "info": {
+            "name": "Update token metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.culqi.com/v2/tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique resource identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update token metadata"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

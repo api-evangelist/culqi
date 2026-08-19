@@ -1,0 +1,195 @@
+{
+  "item": [
+    {
+      "id": "3ddf9b9e-2d90-4bcc-a3ca-6eec5d791cfe",
+      "name": "3DS",
+      "description": {
+        "content": "3-D Secure charge confirmation on the secure host.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba185513-4dbd-4307-bc29-7b23c0c66886",
+          "name": "Confirm a 3DS-authenticated charge",
+          "request": {
+            "name": "Confirm a 3DS-authenticated charge",
+            "description": {
+              "content": "Confirms a charge whose token was authenticated via Culqi 3DS. Sent to the secure host with the public key after the cardholder completes the 3-D Secure challenge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "confirm"
+              ],
+              "host": [
+                "{{confirm-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token_id\": \"<string>\",\n  \"usermail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4bd1dba6-1272-4702-83f2-e8d3407346fa",
+              "name": "Confirmation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{confirm-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"<string>\",\n  \"usermail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"charge\",\n  \"id\": \"chr_test_xxxxxxxxxxxx\",\n  \"amount\": 7760,\n  \"amount_refunded\": 8361,\n  \"currency_code\": \"USD\",\n  \"email\": \"string\",\n  \"description\": \"string\",\n  \"source\": {\n    \"key_0\": \"string\",\n    \"key_1\": 5549.144804115201,\n    \"key_2\": 7450.256808236057,\n    \"key_3\": 7845.885386103473,\n    \"key_4\": \"string\"\n  },\n  \"outcome\": {\n    \"key_0\": true,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  },\n  \"capture\": false,\n  \"creation_date\": 3977,\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba8d0c6-5615-4183-87da-528987f40fe6",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{confirm-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"<string>\",\n  \"usermail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.culqi.com/v2",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://secure.culqi.com/v2",
+      "key": "confirm-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "034abd77-ae03-45db-b7ae-e8f913948c8a",
+    "name": "Culqi API v2 3DS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

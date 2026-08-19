@@ -1,0 +1,188 @@
+{
+  "item": [
+    {
+      "id": "0e91a9e2-8c9f-4fa5-994a-709b612b00cb",
+      "name": "Iins",
+      "description": {
+        "content": "Card BIN / IIN metadata lookup.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fa1b5a3-359c-4d08-9f72-90a13e2e9f71",
+          "name": "Look up card IIN metadata",
+          "request": {
+            "name": "Look up card IIN metadata",
+            "description": {
+              "content": "Returns brand, card type, issuer and country information for a card IIN/BIN.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "iins",
+                ":iin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iin",
+                  "description": "(Required) The card IIN/BIN (first 6 or 8 digits)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "67306b2e-9a9e-49aa-972a-bc4b8daf0e7e",
+              "name": "IIN metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iins",
+                    ":iin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iin",
+                      "description": "(Required) The card IIN/BIN (first 6 or 8 digits)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"iin\",\n  \"bin\": \"string\",\n  \"card_brand\": \"Visa\",\n  \"card_type\": \"credito\",\n  \"card_category\": \"string\",\n  \"issuer\": {\n    \"name\": \"string\",\n    \"country\": \"string\",\n    \"country_code\": \"string\"\n  },\n  \"installments_allowed\": [\n    9394,\n    7281\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83d22a0b-3b57-4635-ab48-6825c8245c39",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iins",
+                    ":iin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iin",
+                      "description": "(Required) The card IIN/BIN (first 6 or 8 digits)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"error\",\n  \"type\": \"card_error\",\n  \"merchant_message\": \"string\",\n  \"user_message\": \"string\",\n  \"param\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.culqi.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6680e1ea-216a-4b07-88b9-7fb45b5f12d6",
+    "name": "Culqi API v2 3DS Iins API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.\n\nContact Support:\n Name: Culqi Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

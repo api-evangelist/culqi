@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Culqi API v2 3DS API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "3DS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Confirm a 3DS-authenticated charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.culqi.com/v2/confirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms a charge whose token was authenticated via Culqi 3DS. Sent to the secure host with the public key after the cardholder completes the 3-D Secure challenge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
