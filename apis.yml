@@ -24,6 +24,14 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/culqi.png
 tags:
 - Payments
 - Payment Gateway
+- Fintech
+- Peru
+- LatAm
+- Cards
+- Yape
+tags_raw:
+- Payments
+- Payment Gateway
 - FinTech
 - Peru
 - LatAm
@@ -159,6 +167,8 @@ apis:
   humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
   baseURL: https://secure.culqi.com/v2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -219,6 +229,8 @@ apis:
   humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
   baseURL: https://secure.culqi.com/v2
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -309,6 +321,8 @@ apis:
   humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
   baseURL: https://secure.culqi.com/v2
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
