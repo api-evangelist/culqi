@@ -7,6 +7,18 @@ description: Culqi is a Peruvian online payments platform and a Grupo Credicorp 
   mobile wallet and Cuotealo (installment) payments in PEN and USD, with card data
   tokenized client-side against a PCI-scoped secure host and all money movement,
   subscriptions and webhooks driven from a server-side secret key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
