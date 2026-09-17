@@ -55,36 +55,6 @@ created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.23'
 apis:
-- aid: culqi:culqi-3ds-api
-  name: Culqi 3DS API
-  description: 3-D Secure charge confirmation on the secure host.
-  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
-  baseURL: https://secure.culqi.com/v2
-  tags:
-  - 3DS
-  properties:
-  - type: OpenAPI
-    url: openapi/culqi-3ds-api-openapi.yml
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
-  - type: APIReference
-    url: https://apidocs.culqi.com/
-  - type: PostmanCollection
-    url: collections/culqi.postman_collection.json
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/cargos/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
-  - type: Documentation
-    url: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
 - aid: culqi:culqi-cards-api
   name: Culqi Cards API
   description: Cards saved against a customer for recurring or one-click charges.
@@ -401,6 +371,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/culqi-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
+  - type: APIReference
+    url: https://apidocs.culqi.com/
+  - type: PostmanCollection
+    url: collections/culqi.postman_collection.json
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/cargos/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/suscripciones/resumen/
+  - type: Documentation
+    url: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
+- aid: culqi:culqi-3-ds-api
+  name: Culqi 3 DS API
+  description: 3-D Secure charge confirmation on the secure host.
+  humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
+  baseURL: https://secure.culqi.com/v2
+  tags:
+  - 3 DS
+  properties:
+  - type: OpenAPI
+    url: openapi/culqi-3-ds-api-openapi.yml
   - type: Documentation
     url: https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/
   - type: APIReference
