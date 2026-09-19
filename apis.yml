@@ -40,7 +40,7 @@ tags:
 - Payment Gateway
 - Fintech
 - Peru
-- LatAm
+- Latin America
 - Cards
 - Yape
 tags_raw:
@@ -397,6 +397,8 @@ apis:
   humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
   baseURL: https://secure.culqi.com/v2
   tags:
+  - 3D
+  tags_raw:
   - 3 DS
   properties:
   - type: OpenAPI
