@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Culqi API v2 3DS Tokens API
-  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments. The REST API v2 exposes tokenization, charges (cargos), orders, refunds, customers, cards, plans, subscriptions, webhook events, card-BIN (iin) lookup and transfers. Card data is tokenized client-side against the PCI-scoped secure host; all money-movement and management operations run against the server host with a secret key. Amounts are integers in the currency minor unit (cents); supported currencies are PEN (Peruvian Sol) and USD.
+  title: Culqi API v2 Tokens API
+  description: Culqi is a Peruvian online payments platform (a Grupo Credicorp / Krealo company) that lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments.
   termsOfService: https://culqi.com/terminos_y_condiciones/
   contact:
     name: Culqi Developer Support
@@ -131,11 +131,18 @@ paths:
                 $ref: '#/components/schemas/Token'
 components:
   parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
       schema:
         type: string
     Limit:
@@ -147,31 +154,38 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
       schema:
         type: string
   schemas:
-    Metadata:
+    CreateTokenRequest:
       type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    TokenList:
-      $ref: '#/components/schemas/PaginatedList'
-    MetadataUpdate:
-      type: object
+      required:
+      - card_number
+      - cvv
+      - expiration_month
+      - expiration_year
+      - email
       properties:
+        card_number:
+          type: string
+          example: '4111111111111111'
+        cvv:
+          type: string
+          example: '123'
+        expiration_month:
+          type: string
+          example: 09
+        expiration_year:
+          type: string
+          example: '2028'
+        email:
+          type: string
+          format: email
         metadata:
           $ref: '#/components/schemas/Metadata'
     Iin:
@@ -203,61 +217,6 @@ components:
           type: array
           items:
             type: integer
-    CreateTokenRequest:
-      type: object
-      required:
-      - card_number
-      - cvv
-      - expiration_month
-      - expiration_year
-      - email
-      properties:
-        card_number:
-          type: string
-          example: '4111111111111111'
-        cvv:
-          type: string
-          example: '123'
-        expiration_month:
-          type: string
-          example: 09
-        expiration_year:
-          type: string
-          example: '2028'
-        email:
-          type: string
-          format: email
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    PaginatedList:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        paging:
-          type: object
-          properties:
-            previous:
-              type: string
-              nullable: true
-            next:
-              type: string
-              nullable: true
-            cursors:
-              type: object
-              properties:
-                before:
-                  type: string
-                  nullable: true
-                after:
-                  type: string
-                  nullable: true
     Token:
       type: object
       properties:
@@ -288,6 +247,49 @@ components:
           additionalProperties: true
         metadata:
           $ref: '#/components/schemas/Metadata'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type:
+              - string
+              - 'null'
+            next:
+              type:
+              - string
+              - 'null'
+            cursors:
+              type: object
+              properties:
+                before:
+                  type:
+                  - string
+                  - 'null'
+                after:
+                  type:
+                  - string
+                  - 'null'
     Error:
       type: object
       properties:
@@ -305,6 +307,8 @@ components:
           type: string
         code:
           type: string
+    TokenList:
+      $ref: '#/components/schemas/PaginatedList'
     CreateYapeTokenRequest:
       type: object
       required:

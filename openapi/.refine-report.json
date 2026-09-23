@@ -1,18 +1,7 @@
 {
   "provider": "culqi",
   "sources": [
-    "culqi-3ds-api-openapi.yml",
-    "culqi-cards-api-openapi.yml",
-    "culqi-charges-api-openapi.yml",
-    "culqi-customers-api-openapi.yml",
-    "culqi-events-api-openapi.yml",
-    "culqi-iins-api-openapi.yml",
-    "culqi-orders-api-openapi.yml",
-    "culqi-plans-api-openapi.yml",
-    "culqi-refunds-api-openapi.yml",
-    "culqi-subscriptions-api-openapi.yml",
-    "culqi-tokens-api-openapi.yml",
-    "culqi-transfers-api-openapi.yml"
+    "_original/culqi-openapi.yml"
   ],
   "outputs": [
     "culqi-3ds-api-openapi.yml",
@@ -28,9 +17,29 @@
     "culqi-tokens-api-openapi.yml",
     "culqi-transfers-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "culqi-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: culqi-3-ds-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
+  ],
+  "skipped": [
+    "culqi-3-ds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-iins-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "culqi-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
