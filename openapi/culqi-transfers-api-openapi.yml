@@ -56,21 +56,14 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -80,6 +73,13 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
     ResourceId:
       name: id
       in: path
@@ -87,26 +87,33 @@ components:
       description: The unique resource identifier.
       schema:
         type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
   schemas:
-    TransferList:
-      $ref: '#/components/schemas/PaginatedList'
-    Error:
+    Transfer:
       type: object
       properties:
         object:
           type: string
-          example: error
-        type:
+          example: transfer
+        id:
           type: string
-          example: card_error
-        merchant_message:
+          example: tr_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        status:
           type: string
-        user_message:
-          type: string
-        param:
-          type: string
-        code:
-          type: string
+        creation_date:
+          type: integer
+    TransferList:
+      $ref: '#/components/schemas/PaginatedList'
     CurrencyCode:
       type: string
       description: ISO currency code. Culqi supports PEN and USD.
@@ -146,30 +153,23 @@ components:
                   type:
                   - string
                   - 'null'
-    Transfer:
+    Error:
       type: object
       properties:
         object:
           type: string
-          example: transfer
-        id:
+          example: error
+        type:
           type: string
-          example: tr_test_xxxxxxxxxxxx
-        amount:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        status:
+          example: card_error
+        merchant_message:
           type: string
-        creation_date:
-          type: integer
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
   securitySchemes:
     secretKey:
       type: http

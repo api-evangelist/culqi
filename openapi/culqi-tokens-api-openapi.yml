@@ -130,38 +130,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Token'
 components:
-  parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
   schemas:
+    TokenList:
+      $ref: '#/components/schemas/PaginatedList'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     CreateTokenRequest:
       type: object
       required:
@@ -188,35 +164,6 @@ components:
           format: email
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Iin:
-      type: object
-      properties:
-        object:
-          type: string
-          example: iin
-        bin:
-          type: string
-        card_brand:
-          type: string
-          example: Visa
-        card_type:
-          type: string
-          example: credito
-        card_category:
-          type: string
-        issuer:
-          type: object
-          properties:
-            name:
-              type: string
-            country:
-              type: string
-            country_code:
-              type: string
-        installments_allowed:
-          type: array
-          items:
-            type: integer
     Token:
       type: object
       properties:
@@ -247,16 +194,40 @@ components:
           additionalProperties: true
         metadata:
           $ref: '#/components/schemas/Metadata'
-    MetadataUpdate:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     Metadata:
       type: object
       description: Arbitrary key/value metadata attached to a resource.
       additionalProperties:
         type: string
+    Iin:
+      type: object
+      properties:
+        object:
+          type: string
+          example: iin
+        bin:
+          type: string
+        card_brand:
+          type: string
+          example: Visa
+        card_type:
+          type: string
+          example: credito
+        card_category:
+          type: string
+        issuer:
+          type: object
+          properties:
+            name:
+              type: string
+            country:
+              type: string
+            country_code:
+              type: string
+        installments_allowed:
+          type: array
+          items:
+            type: integer
     PaginatedList:
       type: object
       properties:
@@ -307,8 +278,6 @@ components:
           type: string
         code:
           type: string
-    TokenList:
-      $ref: '#/components/schemas/PaginatedList'
     CreateYapeTokenRequest:
       type: object
       required:
@@ -334,6 +303,37 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
   securitySchemes:
     secretKey:
       type: http

@@ -98,45 +98,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
-  parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
   schemas:
+    RefundList:
+      $ref: '#/components/schemas/PaginatedList'
     MetadataUpdate:
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
-    RefundList:
-      $ref: '#/components/schemas/PaginatedList'
+    Refund:
+      type: object
+      properties:
+        object:
+          type: string
+          example: refund
+        id:
+          type: string
+          example: ref_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        charge_id:
+          type: string
+        reason:
+          type: string
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
     CreateRefundRequest:
       type: object
       required:
@@ -207,30 +200,6 @@ components:
           type: string
         code:
           type: string
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    Refund:
-      type: object
-      properties:
-        object:
-          type: string
-          example: refund
-        id:
-          type: string
-          example: ref_test_xxxxxxxxxxxx
-        amount:
-          type: integer
-        charge_id:
-          type: string
-        reason:
-          type: string
-        creation_date:
-          type: integer
-        metadata:
-          $ref: '#/components/schemas/Metadata'
   responses:
     Error:
       description: Error response
@@ -238,6 +207,37 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
   securitySchemes:
     secretKey:
       type: http

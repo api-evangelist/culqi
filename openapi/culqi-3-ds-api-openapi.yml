@@ -43,7 +43,51 @@ paths:
         '400':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ConfirmRequest:
+      type: object
+      required:
+      - token_id
+      properties:
+        token_id:
+          type: string
+        usermail:
+          type: string
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
     Charge:
       type: object
       properties:
@@ -75,50 +119,6 @@ components:
           type: integer
         metadata:
           $ref: '#/components/schemas/Metadata'
-    ConfirmRequest:
-      type: object
-      required:
-      - token_id
-      properties:
-        token_id:
-          type: string
-        usermail:
-          type: string
-    CurrencyCode:
-      type: string
-      description: ISO currency code. Culqi supports PEN and USD.
-      enum:
-      - PEN
-      - USD
-    Error:
-      type: object
-      properties:
-        object:
-          type: string
-          example: error
-        type:
-          type: string
-          example: card_error
-        merchant_message:
-          type: string
-        user_message:
-          type: string
-        param:
-          type: string
-        code:
-          type: string
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     secretKey:
       type: http

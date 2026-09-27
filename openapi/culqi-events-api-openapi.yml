@@ -56,21 +56,14 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -80,11 +73,25 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
     ResourceId:
       name: id
       in: path
       required: true
       description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
       schema:
         type: string
   schemas:
@@ -157,13 +164,6 @@ components:
         data:
           type: object
           additionalProperties: true
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     secretKey:
       type: http

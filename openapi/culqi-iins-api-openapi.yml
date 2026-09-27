@@ -43,6 +43,23 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
     Iin:
       type: object
       properties:
@@ -72,23 +89,6 @@ components:
           type: array
           items:
             type: integer
-    Error:
-      type: object
-      properties:
-        object:
-          type: string
-          example: error
-        type:
-          type: string
-          example: card_error
-        merchant_message:
-          type: string
-        user_message:
-          type: string
-        param:
-          type: string
-        code:
-          type: string
   responses:
     Error:
       description: Error response

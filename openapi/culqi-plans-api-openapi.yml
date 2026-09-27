@@ -112,7 +112,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Deleted'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
     After:
       name: after
       in: query
@@ -127,15 +143,6 @@ components:
       description: Cursor - return records created before this id.
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
     ResourceId:
       name: id
       in: path
@@ -144,71 +151,18 @@ components:
       schema:
         type: string
   schemas:
-    PlanList:
-      $ref: '#/components/schemas/PaginatedList'
-    Deleted:
-      type: object
-      properties:
-        deleted:
-          type: boolean
-        id:
-          type: string
-        merchant_message:
-          type: string
-    CreatePlanRequest:
-      type: object
-      required:
-      - name
-      - amount
-      - currency_code
-      - interval_unit_time
-      - interval_count
-      properties:
-        name:
-          type: string
-        amount:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        interval_unit_time:
-          type: integer
-          description: Interval unit (e.g. 1=daily, 2=weekly, 3=monthly, 4=yearly).
-        interval_count:
-          type: integer
-          description: Number of intervals between charges.
-        limit:
-          type: integer
-          description: Maximum number of charges (0 = unlimited).
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     MetadataUpdate:
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Plan:
+    PlanList:
+      $ref: '#/components/schemas/PaginatedList'
+    Metadata:
       type: object
-      properties:
-        object:
-          type: string
-          example: plan
-        id:
-          type: string
-          example: pln_test_xxxxxxxxxxxx
-        name:
-          type: string
-        amount:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        interval_unit_time:
-          type: integer
-        interval_count:
-          type: integer
-        creation_date:
-          type: integer
-        metadata:
-          $ref: '#/components/schemas/Metadata'
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
     CurrencyCode:
       type: string
       description: ISO currency code. Culqi supports PEN and USD.
@@ -265,18 +219,64 @@ components:
           type: string
         code:
           type: string
-    Metadata:
+    CreatePlanRequest:
       type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+      required:
+      - name
+      - amount
+      - currency_code
+      - interval_unit_time
+      - interval_count
+      properties:
+        name:
+          type: string
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        interval_unit_time:
+          type: integer
+          description: Interval unit (e.g. 1=daily, 2=weekly, 3=monthly, 4=yearly).
+        interval_count:
+          type: integer
+          description: Number of intervals between charges.
+        limit:
+          type: integer
+          description: Maximum number of charges (0 = unlimited).
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Plan:
+      type: object
+      properties:
+        object:
+          type: string
+          example: plan
+        id:
+          type: string
+          example: pln_test_xxxxxxxxxxxx
+        name:
+          type: string
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        interval_unit_time:
+          type: integer
+        interval_count:
+          type: integer
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Deleted:
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
   securitySchemes:
     secretKey:
       type: http

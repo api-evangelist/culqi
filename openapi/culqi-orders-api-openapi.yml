@@ -134,55 +134,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/Order'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
   schemas:
     OrderList:
       $ref: '#/components/schemas/PaginatedList'
-    CreateOrderRequest:
-      type: object
-      required:
-      - amount
-      - currency_code
-      - description
-      - order_number
-      - client_details
-      - expiration_date
-      properties:
-        amount:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        description:
-          type: string
-        order_number:
-          type: string
-        client_details:
-          type: object
-          properties:
-            first_name:
-              type: string
-            last_name:
-              type: string
-            email:
-              type: string
-            phone_number:
-              type: string
-        expiration_date:
-          type: integer
-          description: Unix timestamp when the order (e.g. PagoEfectivo CIP) expires.
-        payment_methods:
-          type: object
-          additionalProperties: true
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Deleted:
-      type: object
-      properties:
-        deleted:
-          type: boolean
-        id:
-          type: string
-        merchant_message:
-          type: string
     MetadataUpdate:
       type: object
       properties:
@@ -222,6 +214,11 @@ components:
       properties:
         order_id:
           type: string
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
     CurrencyCode:
       type: string
       description: ISO currency code. Culqi supports PEN and USD.
@@ -278,49 +275,52 @@ components:
           type: string
         code:
           type: string
-    Metadata:
+    CreateOrderRequest:
       type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-  parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+      required:
+      - amount
+      - currency_code
+      - description
+      - order_number
+      - client_details
+      - expiration_date
+      properties:
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        description:
+          type: string
+        order_number:
+          type: string
+        client_details:
+          type: object
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            email:
+              type: string
+            phone_number:
+              type: string
+        expiration_date:
+          type: integer
+          description: Unix timestamp when the order (e.g. PagoEfectivo CIP) expires.
+        payment_methods:
+          type: object
+          additionalProperties: true
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Deleted:
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
   securitySchemes:
     secretKey:
       type: http
