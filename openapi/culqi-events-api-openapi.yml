@@ -56,35 +56,12 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
     Before:
       name: before
       in: query
       required: false
       description: Cursor - return records created before this id.
-      schema:
-        type: string
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
       schema:
         type: string
     After:
@@ -94,42 +71,23 @@ components:
       description: Cursor - return records created after this id.
       schema:
         type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
   schemas:
-    EventList:
-      $ref: '#/components/schemas/PaginatedList'
-    PaginatedList:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        paging:
-          type: object
-          properties:
-            previous:
-              type:
-              - string
-              - 'null'
-            next:
-              type:
-              - string
-              - 'null'
-            cursors:
-              type: object
-              properties:
-                before:
-                  type:
-                  - string
-                  - 'null'
-                after:
-                  type:
-                  - string
-                  - 'null'
     Error:
       type: object
       properties:
@@ -164,6 +122,48 @@ components:
         data:
           type: object
           additionalProperties: true
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type:
+              - string
+              - 'null'
+            next:
+              type:
+              - string
+              - 'null'
+            cursors:
+              type: object
+              properties:
+                before:
+                  type:
+                  - string
+                  - 'null'
+                after:
+                  type:
+                  - string
+                  - 'null'
+    EventList:
+      $ref: '#/components/schemas/PaginatedList'
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     secretKey:
       type: http

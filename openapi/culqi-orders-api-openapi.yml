@@ -134,14 +134,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Order'
 components:
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -151,20 +158,6 @@ components:
         type: integer
         default: 10
         maximum: 100
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
     ResourceId:
       name: id
       in: path
@@ -173,13 +166,23 @@ components:
       schema:
         type: string
   schemas:
-    OrderList:
-      $ref: '#/components/schemas/PaginatedList'
-    MetadataUpdate:
+    Error:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
     Order:
       type: object
       properties:
@@ -207,74 +210,6 @@ components:
           type: integer
         metadata:
           $ref: '#/components/schemas/Metadata'
-    ConfirmOrderRequest:
-      type: object
-      required:
-      - order_id
-      properties:
-        order_id:
-          type: string
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    CurrencyCode:
-      type: string
-      description: ISO currency code. Culqi supports PEN and USD.
-      enum:
-      - PEN
-      - USD
-    PaginatedList:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        paging:
-          type: object
-          properties:
-            previous:
-              type:
-              - string
-              - 'null'
-            next:
-              type:
-              - string
-              - 'null'
-            cursors:
-              type: object
-              properties:
-                before:
-                  type:
-                  - string
-                  - 'null'
-                after:
-                  type:
-                  - string
-                  - 'null'
-    Error:
-      type: object
-      properties:
-        object:
-          type: string
-          example: error
-        type:
-          type: string
-          example: card_error
-        merchant_message:
-          type: string
-        user_message:
-          type: string
-        param:
-          type: string
-        code:
-          type: string
     CreateOrderRequest:
       type: object
       required:
@@ -312,6 +247,31 @@ components:
           additionalProperties: true
         metadata:
           $ref: '#/components/schemas/Metadata'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
+    ConfirmOrderRequest:
+      type: object
+      required:
+      - order_id
+      properties:
+        order_id:
+          type: string
+    OrderList:
+      $ref: '#/components/schemas/PaginatedList'
     Deleted:
       type: object
       properties:
@@ -321,6 +281,46 @@ components:
           type: string
         merchant_message:
           type: string
+    PaginatedList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        paging:
+          type: object
+          properties:
+            previous:
+              type:
+              - string
+              - 'null'
+            next:
+              type:
+              - string
+              - 'null'
+            cursors:
+              type: object
+              properties:
+                before:
+                  type:
+                  - string
+                  - 'null'
+                after:
+                  type:
+                  - string
+                  - 'null'
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     secretKey:
       type: http

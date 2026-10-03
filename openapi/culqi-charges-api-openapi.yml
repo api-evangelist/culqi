@@ -118,32 +118,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Charge'
 components:
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    MetadataUpdate:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    ChargeList:
-      $ref: '#/components/schemas/PaginatedList'
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    CurrencyCode:
-      type: string
-      description: ISO currency code. Culqi supports PEN and USD.
-      enum:
-      - PEN
-      - USD
     CreateChargeRequest:
       type: object
       required:
@@ -179,6 +154,39 @@ components:
           additionalProperties: true
         metadata:
           $ref: '#/components/schemas/Metadata'
+    ChargeList:
+      $ref: '#/components/schemas/PaginatedList'
+    Charge:
+      type: object
+      properties:
+        object:
+          type: string
+          example: charge
+        id:
+          type: string
+          example: chr_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        amount_refunded:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        email:
+          type: string
+        description:
+          type: string
+        source:
+          type: object
+          additionalProperties: true
+        outcome:
+          type: object
+          additionalProperties: true
+        capture:
+          type: boolean
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     PaginatedList:
       type: object
       properties:
@@ -212,6 +220,22 @@ components:
                   type:
                   - string
                   - 'null'
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
     Error:
       type: object
       properties:
@@ -229,45 +253,7 @@ components:
           type: string
         code:
           type: string
-    Charge:
-      type: object
-      properties:
-        object:
-          type: string
-          example: charge
-        id:
-          type: string
-          example: chr_test_xxxxxxxxxxxx
-        amount:
-          type: integer
-        amount_refunded:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        email:
-          type: string
-        description:
-          type: string
-        source:
-          type: object
-          additionalProperties: true
-        outcome:
-          type: object
-          additionalProperties: true
-        capture:
-          type: boolean
-        creation_date:
-          type: integer
-        metadata:
-          $ref: '#/components/schemas/Metadata'
   parameters:
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
     Before:
       name: before
       in: query
@@ -275,11 +261,11 @@ components:
       description: Cursor - return records created before this id.
       schema:
         type: string
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
       schema:
         type: string
     Limit:
@@ -291,6 +277,20 @@ components:
         type: integer
         default: 10
         maximum: 100
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     secretKey:
       type: http
