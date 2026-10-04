@@ -397,6 +397,8 @@ apis:
   humanURL: https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/
   baseURL: https://secure.culqi.com/v2
   tags:
+  - 3D
+  tags_raw:
   - 3 DS
   properties:
   - type: OpenAPI
@@ -422,6 +424,9 @@ apis:
   - type: Documentation
     url: https://docs.culqi.com/es/documentacion/pagos-online/webhooks/
 common:
+- type: CapabilityMap
+  url: capabilities/culqi-capability-edges.yml
+  name: Culqi Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/culqi/overview
 - type: AgenticAccess
