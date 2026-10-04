@@ -112,6 +112,23 @@ paths:
                 $ref: '#/components/schemas/Deleted'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        object:
+          type: string
+          example: error
+        type:
+          type: string
+          example: card_error
+        merchant_message:
+          type: string
+        user_message:
+          type: string
+        param:
+          type: string
+        code:
+          type: string
     CreateCustomerRequest:
       type: object
       required:
@@ -142,6 +159,63 @@ components:
           type: string
         metadata:
           $ref: '#/components/schemas/Metadata'
+    Customer:
+      type: object
+      properties:
+        object:
+          type: string
+          example: customer
+        id:
+          type: string
+          example: cus_test_xxxxxxxxxxxx
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        creation_date:
+          type: integer
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Deleted:
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
+    CustomerList:
+      $ref: '#/components/schemas/PaginatedList'
+    Card:
+      type: object
+      properties:
+        object:
+          type: string
+          example: card
+        id:
+          type: string
+          example: crd_test_xxxxxxxxxxxx
+        customer_id:
+          type: string
+        source:
+          type: object
+          additionalProperties: true
+        creation_date:
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
     PaginatedList:
       type: object
       properties:
@@ -175,95 +249,7 @@ components:
                   type:
                   - string
                   - 'null'
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    CustomerList:
-      $ref: '#/components/schemas/PaginatedList'
-    Customer:
-      type: object
-      properties:
-        object:
-          type: string
-          example: customer
-        id:
-          type: string
-          example: cus_test_xxxxxxxxxxxx
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        creation_date:
-          type: integer
-        cards:
-          type: array
-          items:
-            $ref: '#/components/schemas/Card'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Card:
-      type: object
-      properties:
-        object:
-          type: string
-          example: card
-        id:
-          type: string
-          example: crd_test_xxxxxxxxxxxx
-        customer_id:
-          type: string
-        source:
-          type: object
-          additionalProperties: true
-        creation_date:
-          type: integer
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Deleted:
-      type: object
-      properties:
-        deleted:
-          type: boolean
-        id:
-          type: string
-        merchant_message:
-          type: string
-    Error:
-      type: object
-      properties:
-        object:
-          type: string
-          example: error
-        type:
-          type: string
-          example: card_error
-        merchant_message:
-          type: string
-        user_message:
-          type: string
-        param:
-          type: string
-        code:
-          type: string
   parameters:
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -273,11 +259,25 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
     ResourceId:
       name: id
       in: path
       required: true
       description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
       schema:
         type: string
   responses:

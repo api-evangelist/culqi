@@ -56,37 +56,6 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
-  parameters:
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -105,6 +74,8 @@ components:
           type: string
         code:
           type: string
+    EventList:
+      $ref: '#/components/schemas/PaginatedList'
     Event:
       type: object
       properties:
@@ -155,8 +126,37 @@ components:
                   type:
                   - string
                   - 'null'
-    EventList:
-      $ref: '#/components/schemas/PaginatedList'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
   responses:
     Error:
       description: Error response

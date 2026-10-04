@@ -130,37 +130,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Token'
 components:
-  parameters:
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -179,63 +148,6 @@ components:
           type: string
         code:
           type: string
-    MetadataUpdate:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
-    Iin:
-      type: object
-      properties:
-        object:
-          type: string
-          example: iin
-        bin:
-          type: string
-        card_brand:
-          type: string
-          example: Visa
-        card_type:
-          type: string
-          example: credito
-        card_category:
-          type: string
-        issuer:
-          type: object
-          properties:
-            name:
-              type: string
-            country:
-              type: string
-            country_code:
-              type: string
-        installments_allowed:
-          type: array
-          items:
-            type: integer
-    CreateYapeTokenRequest:
-      type: object
-      required:
-      - amount
-      - otp
-      - number_phone
-      properties:
-        amount:
-          type: integer
-          description: Amount in minor units (cents).
-        otp:
-          type: string
-          description: Yape approval code entered by the payer.
-        number_phone:
-          type: string
-          description: Payer Yape phone number.
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     Token:
       type: object
       properties:
@@ -266,6 +178,24 @@ components:
           additionalProperties: true
         metadata:
           $ref: '#/components/schemas/Metadata'
+    CreateYapeTokenRequest:
+      type: object
+      required:
+      - amount
+      - otp
+      - number_phone
+      properties:
+        amount:
+          type: integer
+          description: Amount in minor units (cents).
+        otp:
+          type: string
+          description: Yape approval code entered by the payer.
+        number_phone:
+          type: string
+          description: Payer Yape phone number.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     CreateTokenRequest:
       type: object
       required:
@@ -292,6 +222,47 @@ components:
           format: email
         metadata:
           $ref: '#/components/schemas/Metadata'
+    TokenList:
+      $ref: '#/components/schemas/PaginatedList'
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    MetadataUpdate:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Iin:
+      type: object
+      properties:
+        object:
+          type: string
+          example: iin
+        bin:
+          type: string
+        card_brand:
+          type: string
+          example: Visa
+        card_type:
+          type: string
+          example: credito
+        card_category:
+          type: string
+        issuer:
+          type: object
+          properties:
+            name:
+              type: string
+            country:
+              type: string
+            country_code:
+              type: string
+        installments_allowed:
+          type: array
+          items:
+            type: integer
     PaginatedList:
       type: object
       properties:
@@ -325,8 +296,37 @@ components:
                   type:
                   - string
                   - 'null'
-    TokenList:
-      $ref: '#/components/schemas/PaginatedList'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
   responses:
     Error:
       description: Error response

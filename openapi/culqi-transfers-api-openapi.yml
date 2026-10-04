@@ -57,23 +57,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    Transfer:
-      type: object
-      properties:
-        object:
-          type: string
-          example: transfer
-        id:
-          type: string
-          example: tr_test_xxxxxxxxxxxx
-        amount:
-          type: integer
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        status:
-          type: string
-        creation_date:
-          type: integer
     Error:
       type: object
       properties:
@@ -91,14 +74,31 @@ components:
           type: string
         code:
           type: string
+    Transfer:
+      type: object
+      properties:
+        object:
+          type: string
+          example: transfer
+        id:
+          type: string
+          example: tr_test_xxxxxxxxxxxx
+        amount:
+          type: integer
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        status:
+          type: string
+        creation_date:
+          type: integer
+    TransferList:
+      $ref: '#/components/schemas/PaginatedList'
     CurrencyCode:
       type: string
       description: ISO currency code. Culqi supports PEN and USD.
       enum:
       - PEN
       - USD
-    TransferList:
-      $ref: '#/components/schemas/PaginatedList'
     PaginatedList:
       type: object
       properties:
@@ -133,20 +133,6 @@ components:
                   - string
                   - 'null'
   parameters:
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -156,11 +142,25 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
     ResourceId:
       name: id
       in: path
       required: true
       description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
       schema:
         type: string
   responses:

@@ -112,37 +112,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Deleted'
 components:
-  parameters:
-    Before:
-      name: before
-      in: query
-      required: false
-      description: Cursor - return records created before this id.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      required: false
-      description: Cursor - return records created after this id.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 100).
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique resource identifier.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -161,16 +130,23 @@ components:
           type: string
         code:
           type: string
-    MetadataUpdate:
+    PlanList:
+      $ref: '#/components/schemas/PaginatedList'
+    CurrencyCode:
+      type: string
+      description: ISO currency code. Culqi supports PEN and USD.
+      enum:
+      - PEN
+      - USD
+    Deleted:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Metadata:
-      type: object
-      description: Arbitrary key/value metadata attached to a resource.
-      additionalProperties:
-        type: string
+        deleted:
+          type: boolean
+        id:
+          type: string
+        merchant_message:
+          type: string
     Plan:
       type: object
       properties:
@@ -194,12 +170,6 @@ components:
           type: integer
         metadata:
           $ref: '#/components/schemas/Metadata'
-    CurrencyCode:
-      type: string
-      description: ISO currency code. Culqi supports PEN and USD.
-      enum:
-      - PEN
-      - USD
     CreatePlanRequest:
       type: object
       required:
@@ -226,17 +196,16 @@ components:
           description: Maximum number of charges (0 = unlimited).
         metadata:
           $ref: '#/components/schemas/Metadata'
-    PlanList:
-      $ref: '#/components/schemas/PaginatedList'
-    Deleted:
+    Metadata:
+      type: object
+      description: Arbitrary key/value metadata attached to a resource.
+      additionalProperties:
+        type: string
+    MetadataUpdate:
       type: object
       properties:
-        deleted:
-          type: boolean
-        id:
-          type: string
-        merchant_message:
-          type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     PaginatedList:
       type: object
       properties:
@@ -270,6 +239,37 @@ components:
                   type:
                   - string
                   - 'null'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 100).
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Before:
+      name: before
+      in: query
+      required: false
+      description: Cursor - return records created before this id.
+      schema:
+        type: string
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique resource identifier.
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      required: false
+      description: Cursor - return records created after this id.
+      schema:
+        type: string
   responses:
     Error:
       description: Error response
