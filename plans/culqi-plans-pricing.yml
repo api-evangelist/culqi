@@ -148,3 +148,53 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - negotiated
+  - transaction
+  plans:
+  - name: Online payments (CulqiOnline / CulqiLink)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - transaction
+    periods:
+    - per-use
+  - name: Yape via Culqi
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - transaction
+    periods:
+    - per-use
+  - name: PagoEfectivo / cash agents via Culqi
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - transaction
+    periods:
+    - per-use
+  - name: CulqiFull (in-person POS)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - transaction
+    periods:
+    - per-use
+  - name: Negotiated / volume
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
