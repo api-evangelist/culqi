@@ -1,4 +1,4 @@
-# Culqi (culqi)
+# Culqi
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,274 +66,178 @@
 
 Culqi is a Peruvian online payments platform and a Grupo Credicorp / Krealo company. Its REST API v2 lets businesses accept card, Yape, PagoEfectivo, mobile wallet and Cuotealo (installment) payments in PEN and USD, with card data tokenized client-side against a PCI-scoped secure host and all money movement, subscriptions and webhooks driven from a server-side secret key.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/culqi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/culqi/refs/heads/main/apis.yml)
+**Areas:** Payments · Payment Gateway · Fintech · Peru · Latin America · Cards · Yape
 
-## Tags
+## Culqi on APIs.io
 
-- Payments
-- Payment Gateway
-- FinTech
-- Peru
-- LatAm
-- Cards
-- Yape
+Everything profiled for Culqi is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/culqi/](https://apis.io/providers/culqi/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (12)
 
-- **Created:** 2026-07-17
-- **Modified:** 2026-07-17
+- [Culqi Cards API](https://apis.io/apis/culqi/culqi-cards-api/) — Cards saved against a customer for recurring or one-click charges.
+- [Culqi Charges API](https://apis.io/apis/culqi/culqi-charges-api/) — One-time charges (cargos) against a token or saved card.
+- [Culqi Customers API](https://apis.io/apis/culqi/culqi-customers-api/) — Stored customer (cliente) profiles.
+- [Culqi Events API](https://apis.io/apis/culqi/culqi-events-api/) — Webhook event objects representing account activity.
+- [Culqi Iins API](https://apis.io/apis/culqi/culqi-iins-api/) — Card BIN / IIN metadata lookup.
+- [Culqi Orders API](https://apis.io/apis/culqi/culqi-orders-api/) — Payment orders for PagoEfectivo (CIP) and bank-transfer / cash-agent flows.
+- [Culqi Plans API](https://apis.io/apis/culqi/culqi-plans-api/) — Recurring-billing plan definitions.
+- [Culqi Refunds API](https://apis.io/apis/culqi/culqi-refunds-api/) — Full or partial refunds (devoluciones) of a charge.
+- [Culqi Subscriptions API](https://apis.io/apis/culqi/culqi-subscriptions-api/) — Subscriptions linking a saved card to a plan.
+- [Culqi Tokens API](https://apis.io/apis/culqi/culqi-tokens-api/) — Client-side tokenization of card and Yape credentials on the secure host.
+- [Culqi Transfers API](https://apis.io/apis/culqi/culqi-transfers-api/) — Settlement transfers (abonos) paid out to the merchant.
+- [Culqi 3 DS API](https://apis.io/apis/culqi/culqi-3-ds-api/) — 3-D Secure charge confirmation on the secure host.
 
-## Hosts & Authentication
+### Published properties
 
-Culqi API v2 spans two hosts, both authenticated with an HTTP Bearer key:
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- `https://api.culqi.com/v2` — server-side operations (charges, orders, refunds, customers, cards, plans, subscriptions, events, iins, transfers), authenticated with the **secret key** (`sk_live_`/`sk_test_`).
-- `https://secure.culqi.com/v2` — PCI-scoped card/Yape tokenization and 3-D Secure charge confirmation, authenticated with the **public key** (`pk_live_`/`pk_test_`).
+#### AsyncAPI (1)
 
-Amounts are integers in the currency minor unit (cents); `currency_code` is `PEN` or `USD`.
+Event-driven and webhook contracts.
 
-## APIs
+- [Culqi Events Webhooks](https://apis.io/asyncapis/culqi/culqi-events-webhooks/)
 
-### Culqi Tokens API
+#### MCP servers (1)
 
-Client-side tokenization of card and Yape credentials on the PCI-scoped secure host using the public key (pk_). Returns a single-use token (tkn_/ype_) used as the source_id for a charge, plus 3DS charge confirmation.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/](https://docs.culqi.com/es/documentacion/pagos-online/api-directa/introduccion/)
-- **Base URL:** `https://secure.culqi.com/v2`
+- [culqi](https://apis.io/servers/culqi/culqi/)
 
-#### Tags
+#### Agentic access (1)
 
-- Tokens
-- Tokenization
-- PCI
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Culqi Agentic Access](https://apis.io/agentic-access/culqi/culqi-agentic-access/)
 
-- [Documentation](https://docs.culqi.com/es/documentacion/culqi-js/v4/culqi-js/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+#### Collections (24)
 
-### Culqi Charges API
+Postman and Open Collection request collections.
 
-Create, capture, retrieve and list one-time charges (cargos) against a token, saved card or Yape token. Supports authorization holds and Cuotealo installments.
+- [Culqi API v2 3DS API](https://apis.io/collections/culqi/open-culqi-3ds-api/)
+- [Culqi API v2 3DS Cards API](https://apis.io/collections/culqi/open-culqi-cards-api/)
+- [Culqi API v2 3DS Charges API](https://apis.io/collections/culqi/open-culqi-charges-api/)
+- [Culqi API v2 3DS Customers API](https://apis.io/collections/culqi/open-culqi-customers-api/)
+- [Culqi API v2 3DS Events API](https://apis.io/collections/culqi/open-culqi-events-api/)
+- [Culqi API v2 3DS Iins API](https://apis.io/collections/culqi/open-culqi-iins-api/)
+- [Culqi API v2 3DS Orders API](https://apis.io/collections/culqi/open-culqi-orders-api/)
+- [Culqi API v2 3DS Plans API](https://apis.io/collections/culqi/open-culqi-plans-api/)
+- [Culqi API v2 3DS Refunds API](https://apis.io/collections/culqi/open-culqi-refunds-api/)
+- [Culqi API v2 3DS Subscriptions API](https://apis.io/collections/culqi/open-culqi-subscriptions-api/)
+- [Culqi API v2 3DS Tokens API](https://apis.io/collections/culqi/open-culqi-tokens-api/)
+- [Culqi API v2 3DS Transfers API](https://apis.io/collections/culqi/open-culqi-transfers-api/)
+- [Culqi API v2 3DS API](https://apis.io/collections/culqi/postman-culqi-3ds-api/)
+- [Culqi API v2 3DS Cards API](https://apis.io/collections/culqi/postman-culqi-cards-api/)
+- [Culqi API v2 3DS Charges API](https://apis.io/collections/culqi/postman-culqi-charges-api/)
+- [Culqi API v2 3DS Customers API](https://apis.io/collections/culqi/postman-culqi-customers-api/)
+- [Culqi API v2 3DS Events API](https://apis.io/collections/culqi/postman-culqi-events-api/)
+- [Culqi API v2 3DS Iins API](https://apis.io/collections/culqi/postman-culqi-iins-api/)
+- [Culqi API v2 3DS Orders API](https://apis.io/collections/culqi/postman-culqi-orders-api/)
+- [Culqi API v2 3DS Plans API](https://apis.io/collections/culqi/postman-culqi-plans-api/)
+- [Culqi API v2 3DS Refunds API](https://apis.io/collections/culqi/postman-culqi-refunds-api/)
+- [Culqi API v2 3DS Subscriptions API](https://apis.io/collections/culqi/postman-culqi-subscriptions-api/)
+- [Culqi API v2 3DS Tokens API](https://apis.io/collections/culqi/postman-culqi-tokens-api/)
+- [Culqi API v2 3DS Transfers API](https://apis.io/collections/culqi/postman-culqi-transfers-api/)
 
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/resumen/](https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
+#### Overlays (1)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- Charges
-- Payments
-- Cargos
+- [Culqi Openapi Overlay](https://apis.io/overlays/culqi/culqi-openapi-overlay/)
 
-#### Properties
+#### Security (4)
 
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/cargo-unico/cargos/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Culqi Orders API
+- [Culqi Authentication](https://apis.io/security/culqi/culqi-authentication/)
+- [Culqi Domain Security](https://apis.io/security/culqi/culqi-domain-security/)
+- [Culqi Trust Center](https://apis.io/security/culqi/culqi-trust-center/)
+- [Culqi Vulnerability Disclosure](https://apis.io/security/culqi/culqi-vulnerability-disclosure/)
 
-Payment orders for asynchronous methods such as PagoEfectivo (generates a CIP code) and bank transfers, with create, confirm, retrieve, list, update and delete operations.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/](https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
+Published plans, tiers and prices.
 
-#### Tags
+- [Culqi Plans Pricing](https://apis.io/plans/culqi/culqi-plans-pricing/)
 
-- Orders
-- PagoEfectivo
-- Bank Transfer
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/pago-efectivo/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Culqi Rate Limits](https://apis.io/rate-limits/culqi/culqi-rate-limits/)
 
-### Culqi Refunds API
+#### FinOps (1)
 
-Full or partial refunds (devoluciones) of a charge, with a documented reason (duplicado, fraudulento, solicitud_comprador).
+What the API costs to run, by operation.
 
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/](https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
+- [Culqi Finops](https://apis.io/finops/culqi/culqi-finops/)
 
-#### Tags
+## Where to find this API
 
-- Refunds
-- Devoluciones
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/devoluciones/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Customers API
-
-Create, retrieve, list, update and delete stored customer (cliente) profiles for saving cards and running recurring payments.
-
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/](https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Customers
-- Clientes
-
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/clientes/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Cards API
-
-Save a tokenized card to a customer and manage saved cards (create, retrieve, list, update, delete) for one-click and recurring charges.
-
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/](https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Cards
-- Tarjetas
-- Vault
-
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/tarjetas/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Plans API
-
-Define recurring-billing plans (interval, amount, currency, limit) that subscriptions bill against.
-
-- **Human URL:** [https://docs.culqi.com/es/documentacion/suscripciones/resumen/](https://docs.culqi.com/es/documentacion/suscripciones/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Plans
-- Recurring
-- Planes
-
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/suscripciones/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Subscriptions API
-
-Subscribe a saved card to a plan for recurring charges, with create, retrieve, list, update and cancel operations.
-
-- **Human URL:** [https://docs.culqi.com/es/documentacion/suscripciones/resumen/](https://docs.culqi.com/es/documentacion/suscripciones/resumen/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Subscriptions
-- Recurring
-- Suscripciones
-
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/suscripciones/resumen/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Events & Webhooks API
-
-Retrieve and list account event objects (charge.creation.succeeded, order.status.changed, and more) that Culqi delivers to configured webhook endpoints as HTTP callbacks.
-
-- **Human URL:** [https://docs.culqi.com/es/documentacion/pagos-online/webhooks/](https://docs.culqi.com/es/documentacion/pagos-online/webhooks/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Events
-- Webhooks
-- Eventos
-
-#### Properties
-
-- [Documentation](https://docs.culqi.com/es/documentacion/pagos-online/webhooks/)
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi IIN Lookup API
-
-Look up card IIN/BIN metadata (brand, card type, issuer, country, installments allowed) to drive checkout logic.
-
-- **Human URL:** [https://apidocs.culqi.com/](https://apidocs.culqi.com/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- IIN
-- BIN
-- Card Metadata
-
-#### Properties
-
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Culqi Transfers API
-
-Retrieve and list settlement transfers (abonos) paid out to the merchant bank account.
-
-- **Human URL:** [https://apidocs.culqi.com/](https://apidocs.culqi.com/)
-- **Base URL:** `https://api.culqi.com/v2`
-
-#### Tags
-
-- Transfers
-- Settlement
-- Abonos
-
-#### Properties
-
-- [API Reference](https://apidocs.culqi.com/)
-- [OpenAPI](openapi/culqi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/culqi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-## Common Properties
-
-- [Agentic Access](agentic-access/culqi-agentic-access.yml)
-- [Trust Center](security/culqi-trust-center.yml)
-- [Vulnerability Disclosure](security/culqi-vulnerability-disclosure.yml)
-- [Domain Security](security/culqi-domain-security.yml)
-- [Authentication](authentication/culqi-authentication.yml)
-- [GitHub Organization](https://github.com/culqi)
-- [LinkedIn](https://www.linkedin.com/company/culqi)
 - [Website](https://culqi.com/)
 - [Documentation](https://docs.culqi.com/)
-- [Plans](plans/culqi-plans-pricing.yml)
-- [Rate Limits](rate-limits/culqi-rate-limits.yml)
-- [Fin Ops](finops/culqi-finops.yml)
+- [Getting started](https://docs.culqi.com/es/documentacion/primeros-pasos/introduccion/)
+- [API reference](https://apidocs.culqi.com/)
+- [Pricing](https://culqi.com/precios/)
+- [Sign up](https://afiliate.culqi.com/)
+- [Support](https://culqi.com/centro-de-ayuda/)
 - [Blog](https://medium.com/team-culqi)
+- [Terms of service](https://culqi.com/terminos_y_condiciones/)
+- [Privacy policy](https://culqi.com/politicas-de-privacidad/)
+- [GitHub](https://github.com/culqi)
 
-## Notes
+## API Evangelist rating
 
-- **Ownership:** In January 2019 Grupo Crédito S.A. (Credicorp) acquired 91.36% of Culqi and later took it to 100%; Culqi sits alongside Credicorp's digital-venture arm Krealo.
-- **Compliance:** Culqi is a PCI DSS Level 1 processor. Merchants calling the API directly with raw card data must comply with PCI DSS 3.2 and submit an SAQ-D; Culqi recommends client-side tokenization via Culqi Checkout / Culqi JS v4 plus Culqi 3DS and antifraud device fingerprinting.
-- **Spec provenance:** Culqi publishes no downloadable OpenAPI/Swagger document (the reference at apidocs.culqi.com is a client-rendered SPA). The included OpenAPI was modeled from Culqi's live documentation and official SDKs (culqi-python, culqi-go, culqi-php), verified July 2026.
-- **No WebSocket API.** Culqi is REST-only over HTTPS; asynchronous payment status is delivered via outbound HTTP webhook callbacks, not WebSocket or SSE. See [review.yml](review.yml).
+**Kin Score 42.4** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 58.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 41.1 |
+| Access clarity | 30.3 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 31.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 37.5** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/culqi/](https://apis.io/providers/culqi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Culqi: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/culqi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
